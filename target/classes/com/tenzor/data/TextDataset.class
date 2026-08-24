@@ -1,0 +1,78 @@
+                     "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "8px",
+                                            "spacing": "none"
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "Stretch",
+                                            "spacing": "none",
+                                            "verticalContentAlignment": "center",
+                                            "items": [
+                                                {
+                                                    "type": "Container",
+                                                    "spacing": "Small"
+                                                },
+                                                {
+                                                    "type": "Container",
+                                                    "spacing": "Small"
+                                                },
+                                                {
+                                                    "type": "TextBlock",
+                                                    "text": "${getStartedLabel}",
+                                                    "horizontalAlignment": "center",
+                                                    "size": "small",
+                                                    "spacing": "none"
+                                                },
+                                                {
+                                                    "type": "Container",
+                                                    "spacing": "Small"
+                                                },
+                                                {
+                                                    "type": "Container",
+                                                    "spacing": "Small"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "8px",
+                                            "spacing": "none"
+                                        }
+                                    ],
+                                    "selectAction": {
+                                        "type": "Action.OpenUrl",
+                                        "title": "${getStartedLabel}",
+                                        "customStyle": "button",
+                                        "url": "${getStartedUrl}"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "60px",
+                            "spacing": "none"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "spacing": "Medium"
+                },
+                {
+                    "type": "Container",
+                    "height": "stretch",
+                    "spacing": "none"
+                }
+            ]
+        }
+    ],
+    "companionActions": [
+        {
+            "type": "Action.OpenUrl",
+            "$data": "${actions}",
+            "category": "${category}",
+            "glyph": "${glyph}",
+            "fontFamily": "${fontFamil

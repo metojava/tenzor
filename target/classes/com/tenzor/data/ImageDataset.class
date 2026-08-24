@@ -1,0 +1,132 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5",
+    "type": "AdaptiveCard",
+    "speak": "${automationName}",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "spacing": "none",
+            "tooltip": "${device.deviceIconTooltip}",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "spacing": "none"
+                },
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "spacing": "none",
+                    "items": [
+                        {
+                            "type": "ImageSet",
+                            "stacked": true,
+                            "clipMode": "top",
+                            "clipMargin": "${device.wallpaper.wallpaperMargin}",
+                            "clipCornerRadius": "${device.wallpaper.wallpaperCornerRadius}",
+                            "spacing": "none",
+                            "images": [
+                                {
+                                    "type": "Image",
+                                    "url": "${device.wallpaper.wallpaperUrl}",
+                                    "width": "${device.wallpaper.deviceFrameWidth}",
+                                    "height": "${device.wallpaper.wallpaperHeight}",
+                                    "horizontalAlignment": "Center",
+                                    "spacing": "none",
+                                    "accessibilityView": "raw"
+                                },
+                                {
+                                    "type": "Image",
+                                    "url": "${device.wallpaper.deviceFrameUrl}",
+                                    "width": "${device.wallpaper.deviceFrameWidth}",
+                                    "height": "${device.wallpaper.deviceFrameHeight}",
+                                    "horizontalAlignment": "Center",
+                                    "spacing": "none",
+                                    "accessibilityView": "raw"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.OpenUrl",
+                        "title": "${device.deviceIconTooltip}",
+                        "url": "${device.deviceIconLaunchUrl}"
+                    }
+                },
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "spacing": "none"
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "minHeight": "1px",
+            "spacing": "Small"
+        },
+        {
+            "type": "TextBlock",
+            "$when": "${!empty(device.name)}",
+            "text": "${device.name}",
+            "weight": "Bolder",
+            "horizontalAlignment": "Center",
+            "spacing": "Default"
+        },
+        {
+            "type": "Container",
+            "minHeight": "1px",
+            "spacing": "Small"
+        },
+        {
+            "type": "Container",
+            "spacing": "Medium"
+        },
+        {
+            "type": "Container",
+            "height": "stretch",
+            "spacing": "none",
+            "customStyle": "scroll",
+            "items": [
+                {
+                    "type": "Container",
+                    "spacing": "none"
+                },
+                {
+                    "type": "Container",
+                    "spacing": "default"
+                },
+                {
+                    "type": "Container",
+                    "spacing": "small"
+                },
+                {
+                    "type": "Container",
+                    "spacing": "small"
+                },
+                {
+                    "type": "ColumnSet",
+                    "spacing": "none",
+                    "minHeight": "146px",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "12px",
+                            "spacing": "none"
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "spacing": "none",
+                            "items": [
+                                {
+                                    "type": "Container",
+                                    "spacing": "small",
+                                    "customStyle": "list",
+                                    "itemSpacing": "8px",
+                                    "cornerRadius": "4px",
+                                    "title": "${featuresTitle}",
+                                    "items": [
+                                        {
+       

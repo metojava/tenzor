@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.tenzor.ModelTrainingTest" time="0.641" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\dell\Desktop\tenzor\target\test-classes;C:\Users\dell\Desktop\tenzor\target\classes;C:\Users\dell\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\dell\.m2\repository\org\jfree\jfreechart\1.5.4\jfreechart-1.5.4.jar;C:\Users\dell\.m2\repository\org\jfree\jcommon\1.0.24\jcommon-1.0.24.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\dell\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;C:\Users\dell\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\dell\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\dell\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
+    <property name="sun.java.command" value="C:\Users\dell\AppData\Local\Temp\surefire14402516610025533491\surefirebooter-20260522080142578_3.jar C:\Users\dell\AppData\Local\Temp\surefire14402516610025533491 2026-05-22T08-01-41_772-jvmRun1 surefire-20260522080142578_1tmp surefire_0-20260522080142578_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\dell\Desktop\tenzor\target\test-classes;C:\Users\dell\Desktop\tenzor\target\classes;C:\Users\dell\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\dell\.m2\repository\org\jfree\jfreechart\1.5.4\jfreechart-1.5.4.jar;C:\Users\dell\.m2\repository\org\jfree\jcommon\1.0.24\jcommon-1.0.24.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\dell\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;C:\Users\dell\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\dell\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\dell\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\dell"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\dell\Desktop\tenzor"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\dell\AppData\Local\Temp\surefire14402516610025533491\surefirebooter-20260522080142578_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.12+8-LTS-286"/>
+    <property name="user.name" value="dell"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\dell\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\dell\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.12"/>
+    <property name="user.dir" value="C:\Users\dell\Desktop\tenzor"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\scala\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Java\jdk-17\bin;C:\Program Files\Git\cmd;C:\Users\devde\Downloads\apache-maven-3.9.9\bin;C:\ProgramData\chocolatey\bin;C:\Users\dell\Documents\hadoop-3.3.2\bin;C:\Users\dell\Documents\hadoop-3.3.2\sbin;C:\Program Files (x86)\sbt\bin;C:\Program Files\Go\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft\Azure Functions Core Tools\;C:\Program Files\WezTerm;;C:\Users\dell\AppData\Local\Microsoft\WindowsApps;C:\Program Files\PostgreSQL\15\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\MongoDB\Server\6.0\bin;C:\Users\dell\AppData\Local\Programs\Python\Python310;C:\Users\dell\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\dell\Documents\localstack;C:\Users\dell\Documents\elk\elasticsearch\bin;C:\Users\dell\Documents\elk\kibana\bin;C:\Users\dell\Documents\elk\logstash\bin;C:\Users\dell\Documents\apache-maven-3.9.9\bin;C:\Users\dell\Downloads\gogs;C:\Users\dell\Documents\apache-jmeter-5.0\bin;C:\Users\dell\Documents\gawk-3.1.6-1-bin\bin;C:\Users\dell\AppData\Roaming\npm;C:\Program Files\Git\mingw64\bin;C:\Users\dell\Documents\spark-3.5.6-bin-hadoop3\bin;C:\Users\dell\go\bin;C:\Users\dell\AppData\Local\Programs\Microsoft VS Code\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.12+8-LTS-286"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testXOR" classname="com.tenzor.ModelTrainingTest" time="0.563">
+    <system-out><![CDATA[================================================================================
+MODEL TRAINING
+================================================================================
+Train samples:      4
+Validation samples: None
+Epochs:             500
+Batch size:         4
+================================================================================
+
+Epoch  | Train Loss   | Val Loss     | Train Acc    | Val Acc      | Duration  
+----------------------------------------------------------------------------------------------------
+1/500  | 0.251673     | N/A          | N/A          | N/A          | 0.01s     
+2/500  | 0.247826     | N/A          | N/A          | N/A          | 0.00s     
+3/500  | 0.242420     | N/A          | N/A          | N/A          | 0.00s     
+4/500  | 0.238278     | N/A          | N/A          | N/A          | 0.00s     
+5/500  | 0.234267     | N/A          | N/A          | N/A          | 0.00s     
+6/500  | 0.231301     | N/A          | N/A          | N/A          | 0.00s     
+7/500  | 0.227655     | N/A          | N/A          | N/A          | 0.00s     
+8/500  | 0.224075     | N/A          | N/A          | N/A          | 0.00s     
+9/500  | 0.220941     | N/A          | N/A          | N/A          | 0.00s     
+10/500 | 0.218943     | N/A          | N/A          | N/A          | 0.00s     
+11/500 | 0.215660     | N/A          | N/A          | N/A          | 0.00s     
+12/500 | 0.212727     | N/A          | N/A          | N/A          | 0.00s     
+13/500 | 0.210458     | N/A          | N/A          | N/A          | 0.00s     
+14/500 | 0.207195     | N/A          | N/A          | N/A          | 0.00s     
+15/500 | 0.203628     | N/A          | N/A          | N/A          | 0.00s     
+16/500 | 0.201077     | N/A          | N/A          | N/A          | 0.00s     
+17/500 | 0.198431     | N/A          | N/A          | N/A          | 0.00s     
+18/500 | 0.195238     | N/A          | N/A          | N/A          | 0.00s     
+19/500 | 0.192481     | N/A          | N/A          | N/A          | 0.00s     
+20/500 | 0.190713     | N/A          | N/A          | N/A          | 0.00s     
+21/500 | 0.189172     | N/A          | N/A          | N/A          | 0.00s     
+22/500 | 0.186691     | N/A          | N/A          | N/A          | 0.00s     
+23/500 | 0.184790     | N/A          | N/A          | N/A          | 0.00s     
+24/500 | 0.182564     | N/A          | N/A          | N/A          | 0.00s     
+25/500 | 0.180899     | N/A          | N/A          | N/A          | 0.00s     
+26/500 | 0.178173     | N/A          | N/A          | N/A          | 0.00s     
+27/500 | 0.176450     | N/A          | N/A          | N/A          | 0.00s     
+28/500 | 0.174191     | N/A          | N/A          | N/A          | 0.00s     
+29/500 | 0.171967     | N/A          | N/A          | N/A          | 0.00s     
+30/500 | 0.169621     | N/A          | N/A          | N/A          | 0.02s     
+31/500 | 0.167219     | N/A          | N/A          | N/A          | 0.00s     
+32/500 | 0.165360     | N/A          | N/A          | N/A          | 0.00s     
+33/500 | 0.162689     | N/A          | N/A          | N/A          | 0.00s     
+34/500 | 0.160299     | N/A          | N/A          | N/A          | 0.00s     
+35/500 | 0.157908     | N/A          | N/A          | N/A          | 0.00s     
+36/500 | 0.155605     | N/A          | N/A          | N/A          | 0.00s     
+37/500 | 0.153005     | N/A          | N/A          | N/A          | 0.00s     
+38/500 | 0.150546     | N/A          | N/A          | N/A          | 0.00s     
+39/500 | 0.148014     | N/A          | N/A          | N/A          | 0.00s     
+40/500 | 0.145326     | N/A          | N/A          | N/A          | 0.00s     
+41/500 | 0.143159     | N/A          | N/A          | N/A          | 0.00s     
+42/500 | 0.140034     | N/A          | N/A          | N/A          | 0.00s     
+43/500 | 0.137195     | N/A          | N/A          | N/A          | 0.00s     
+44/500 | 0.134367     | N/A          | N/A          | N/A          | 0.00s     
+45/500 | 0.132940     | N/A          | N/A          | N/A          | 0.00s     
+46/500 | 0.130269     | N/A          | N/A          | N/A          | 0.00s     
+47/500 | 0.126961     | N/A          | N/A          | N/A          | 0.00s     
+48/500 | 0.123977     | N/A          | N/A          | N/A          | 0.00s     
+49/500 | 0.121592     | N/A          | N/A          | N/A          | 0.00s     
+50/500 | 0.119106     | N/A          | N/A          | N/A          | 0.00s     
+51/500 | 0.116527     | N/A          | N/A          | N/A          | 0.00s     
+52/500 | 0.113757     | N/A          | N/A          | N/A          | 0.00s     
+53/500 | 0.110673     | N/A          | N/A          | N/A          | 0.00s     
+54/500 | 0.108604     | N/A          | N/A          | N/A          | 0.00s     
+55/500 | 0.106548     | N/A          | N/A          | N/A          | 0.00s     
+56/500 | 0.103717     | N/A          | N/A          | N/A          | 0.00s     
+57/500 | 0.101403     | N/A          | N/A          | N/A          | 0.00s     
+58/500 | 0.098603     | N/A          | N/A          | N/A          | 0.00s     
+59/500 | 0.096729     | N/A          | N/A          | N/A          | 0.00s     
+60/500 | 0.094050     | N/A          | N/A          | N/A          | 0.00s     
+61/500 | 0.091770     | N/A          | N/A          | N/A          | 0.00s     
+62/500 | 0.089718     | N/A          | N/A          | N/A          | 0.02s     
+63/500 | 0.087932     | N/A          | N/A          | N/A          | 0.00s     
+64/500 | 0.085751     | N/A          | N/A          | N/A          | 0.00s     
+65/500 | 0.083138     | N/A          | N/A          | N/A          | 0.00s     
+66/500 | 0.082481     | N/A          | N/A          | N/A          | 0.00s     
+67/500 | 0.079968     | N/A          | N/A          | N/A          | 0.00s     
+68/500 | 0.078013     | N/A          | N/A          | N/A          | 0.00s     
+69/500 | 0.077143     | N/A          | N/A          | N/A          | 0.00s     
+70/500 | 0.074234     | N/A          | N/A          | N/A          | 0.00s     
+71/500 | 0.072811     | N/A          | N/A          | N/A          | 0.00s     
+72/500 | 0.071795     | N/A          | N/A          | N/A          | 0.00s     
+73/500 | 0.069831     | N/A          | N/A          | N/A          | 0.00s     
+74/500 | 0.068413     | N/A          | N/A          | N/A          | 0.00s     
+75/500 | 0.066570     | N/A          | N/A          | N/A          | 0.00s     
+76/500 | 0.065013     | N/A          | N/A          | N/A          | 0.00s     
+77/500 | 0.063316     | N/A          | N/A          | N/A          | 0.00s     
+78/500 | 0.062661     | N/A          | N/A          | N/A          | 0.00s     
+79/500 | 0.060502     | N/A          | N/A          | N/A          | 0.00s     
+80/500 | 0.059596     | N/A          | N/A          | N/A          | 0.00s     
+81/500 | 0.057828     | N/A          | N/A          | N/A          | 0.00s     
+82/500 | 0.056756     | N/A          | N/A          | N/A          | 0.00s     
+83/500 | 0.055284     | N/A          | N/A          | N/A          | 0.00s     
+84/500 | 0.054444     | N/A          | N/A          | N/A          | 0.00s     
+85/500 | 0.054379     | N/A          | N/A          | N/A          | 0.00s     
+86/500 | 0.052592     | N/A          | N/A          | N/A          | 0.00s     
+87/500 | 0.051042     | N/A          | N/A          | N/A          | 0.00s     
+88/500 | 0.050647     | N/A          | N/A          | N/A          | 0.00s     
+89/500 | 0.048974     | N/A          | N/A          | N/A          | 0.02s     
+90/500 | 0.047785     | N/A          | N/A          | N/A          | 0.00s     
+91/500 | 0.047207     | N/A          | N/A          | N/A          | 0.00s     
+92/500 | 0.046766     | N/A          | N/A          | N/A          | 0.00s     
+93/500 | 0.045711     | N/A          | N/A          | N/A          | 0.00s     
+94/500 | 0.044337     | N/A          | N/A          | N/A          | 0.00s     
+95/500 | 0.043215     | N/A          | N/A          | N/A          | 0.00s     
+96/500 | 0.042410     | N/A          | N/A          | N/A          | 0.00s     
+97/500 | 0.041986     | N/A          | N/A          | N/A          | 0.00s     
+98/500 | 0.041279     | N/A          | N/A          | N/A          | 0.00s     
+99/500 | 0.040713     | N/A          | N/A          | N/A          | 0.00s     
+100/500 | 0.039585     | N/A          | N/A          | N/A          | 0.00s     
+101/500 | 0.038609     | N/A          | N/A          | N/A          | 0.00s     
+102/500 | 0.038013     | N/A          | N/A          | N/A          | 0.00s     
+103/500 | 0.037686     | N/A          | N/A          | N/A          | 0.00s     
+104/500 | 0.037061     | N/A          | N/A          | N/A          | 0.00s     
+105/500 | 0.036055     | N/A          | N/A          | N/A          | 0.00s     
+106/500 | 0.035317     | N/A          | N/A          | N/A          | 0.00s     
+107/500 | 0.034632     | N/A          | N/A          | N/A          | 0.00s     
+108/500 | 0.034402     | N/A          | N/A          | N/A          | 0.00s     
+109/500 | 0.033727     | N/A          | N/A          | N/A          | 0.00s     
+110/500 | 0.033034     | N/A          | N/A          | N/A          | 0.00s     
+111/500 | 0.032421     | N/A          | N/A          | N/A          | 0.00s     
+112/500 | 0.031883     | N/A          | N/A          | N/A          | 0.00s     
+113/500 | 0.031638     | N/A          | N/A          | N/A          | 0.00s     
+114/500 | 0.031110     | N/A          | N/A          | N/A          | 0.00s     
+115/500 | 0.030213     | N/A          | N/A          | N/A          | 0.00s     
+116/500 | 0.029746     | N/A          | N/A          | N/A          | 0.00s     
+117/500 | 0.029642     | N/A          | N/A          | N/A          | 0.00s     
+118/500 | 0.029031     | N/A          | N/A          | N/A          | 0.00s     
+119/500 | 0.028306     | N/A          | N/A          | N/A          | 0.00s     
+120/500 | 0.027823     | N/A          | N/A          | N/A          | 0.00s     
+121/500 | 0.027399     | N/A          | N/A          | N/A          | 0.00s     
+122/500 | 0.027333     | N/A          | N/A          | N/A          | 0.00s     
+123/500 | 0.026944     | N/A          | N/A          | N/A          | 0.00s     
+124/500 | 0.026225     | N/A          | N/A          | N/A          | 0.00s     
+125/500 | 0.025752     | N/A          | N/A          | N/A          | 0.00s     
+126/500 | 0.025577     | N/A          | N/A          | N/A          | 0.00s     
+127/500 | 0.025144     | N/A          | N/A          | N/A          | 0.00s     
+128/500 | 0.024722     | N/A          | N/A          | N/A          | 0.00s     
+129/500 | 0.024350     | N/A          | N/A          | N/A          | 0.00s     
+130/500 | 0.024126     | N/A          | N/A          | N/A          | 0.00s     
+131/500 | 0.023763     | N/A          | N/A          | N/A          | 0.00s     
+132/500 | 0.023232     | N/A          | N/A          | N/A          | 0.00s     
+133/500 | 0.022953     | N/A          | N/A          | N/A          | 0.00s     
+134/500 | 0.022666     | N/A          | N/A          | N/A          | 0.00s     
+135/500 | 0.022345     | N/A          | N/A          | N/A          | 0.00s     
+136/500 | 0.022147     | N/A          | N/A          | N/A          | 0.00s     
+137/500 | 0.021680     | N/A          | N/A          | N/A          | 0.00s     
+138/500 | 0.021325     | N/A          | N/A          | N/A          | 0.00s     
+139/500 | 0.021103     | N/A          | N/A          | N/A          | 0.00s     
+140/500 | 0.020822     | N/A          | N/A          | N/A          | 0.00s     
+141/500 | 0.020513     | N/A          | N/A          | N/A          | 0.00s     
+142/500 | 0.020199     | N/A          | N/A          | N/A          | 0.00s     
+143/500 | 0.019999     | N/A          | N/A          | N/A          | 0.00s     
+144/500 | 0.019681     | N/A          | N/A          | N/A          | 0.00s     
+145/500 | 0.019421     | N/A          | N/A          | N/A          | 0.00s     
+146/500 | 0.019187     | N/A          | N/A          | N/A          | 0.00s     
+147/500 | 0.018958     | N/A          | N/A          | N/A          | 0.00s     
+148/500 | 0.018898     | N/A          | N/A          | N/A          | 0.00s     
+149/500 | 0.018546     | N/A          | N/A          | N/A          | 0.00s     
+150/500 | 0.018188     | N/A          | N/A          | N/A          | 0.00s     
+151/500 | 0.017973     | N/A          | N/A          | N/A          | 0.00s     
+152/500 | 0.017932     | N/A          | N/A          | N/A          | 0.00s     
+153/500 | 0.017699     | N/A          | N/A          | N/A          | 0.00s     
+154/500 | 0.017359     | N/A          | N/A          | N/A          | 0.00s     
+155/500 | 0.017123     | N/A          | N/A          | N/A          | 0.00s     
+156/500 | 0.016901     | N/A          | N/A          | N/A          | 0.00s     
+157/500 | 0.016782     | N/A          | N/A          | N/A          | 0.00s     
+158/500 | 0.016668     | N/A          | N/A          | N/A          | 0.00s     
+159/500 | 0.016336     | N/A          | N/A          | N/A          | 0.02s     
+160/500 | 0.016189     | N/A          | N/A          | N/A          | 0.00s     
+161/500 | 0.015965     | N/A          | N/A          | N/A          | 0.00s     
+162/500 | 0.015749     | N/A          | N/A          | N/A          | 0.00s     
+163/500 | 0.015681     | N/A          | N/A          | N/A          | 0.00s     
+164/500 | 0.015427     | N/A          | N/A          | N/A          | 0.00s     
+165/500 | 0.015295     | N/A          | N/A          | N/A          | 0.00s     
+166/500 | 0.015089     | N/A          | N/A          | N/A          | 0.00s     
+167/500 | 0.014891     | N/A          | N/A          | N/A          | 0.00s     
+168/500 | 0.014708     | N/A          | N/A          | N/A          | 0.00s     
+169/500 | 0.014668     | N/A          | N/A          | N/A          | 0.00s     
+170/500 | 0.014407     | N/A          | N/A          | N/A          | 0.00s     
+171/500 | 0.014279     | N/A          | N/A          | N/A          | 0.00s     
+172/500 | 0.014147     | N/A          | N/A          | N/A          | 0.00s     
+173/500 | 0.013940     | N/A          | N/A          | N/A          | 0.00s     
+174/500 | 0.013771     | N/A          | N/A          | N/A          | 0.00s     
+175/500 | 0.013765     | N/A          | N/A          | N/A          | 0.00s     
+176/500 | 0.013518     | N/A          | N/A          | N/A          | 0.00s     
+177/500 | 0.013341     | N/A          | N/A          | N/A          | 0.00s     
+178/500 | 0.013216     | N/A          | N/A          | N/A          | 0.00s     
+179/500 | 0.013108     | N/A          | N/A          | N/A          | 0.00s     
+180/500 | 0.012938     | N/A          | N/A          | N/A          | 0.00s     
+181/500 | 0.012924     | N/A          | N/A          | N/A          | 0.00s     
+182/500 | 0.012728     | N/A          | N/A          | N/A          | 0.00s     
+183/500 | 0.012580     | N/A          | N/A          | N/A          | 0.02s     
+184/500 | 0.012433     | N/A          | N/A          | N/A          | 0.00s     
+185/500 | 0.012315     | N/A          | N/A          | N/A          | 0.00s     
+186/500 | 0.012188     | N/A          | N/A          | N/A          | 0.00s     
+187/500 | 0.012104     | N/A          | N/A          | N/A          | 0.00s     
+188/500 | 0.011942     | N/A          | N/A          | N/A          | 0.00s     
+189/500 | 0.011814     | N/A          | N/A          | N/A          | 0.00s     
+190/500 | 0.011732     | N/A          | N/A          | N/A          | 0.00s     
+191/500 | 0.011597     | N/A          | N/A          | N/A          | 0.00s     
+192/500 | 0.011507     | N/A          | N/A          | N/A          | 0.00s     
+193/500 | 0.011425     | N/A          | N/A          | N/A          | 0.00s     
+194/500 | 0.011282     | N/A          | N/A          | N/A          | 0.00s     
+195/500 | 0.011191     | N/A          | N/A          | N/A          | 0.00s     
+196/500 | 0.011064     | N/A          | N/A          | N/A          | 0.00s     
+197/500 | 0.010972     | N/A          | N/A          | N/A          | 0.00s     
+198/500 | 0.010905     | N/A          | N/A          | N/A          | 0.00s     
+199/500 | 0.010778     | N/A          | N/A          | N/A          | 0.00s     
+200/500 | 0.010663     | N/A          | N/A          | N/A          | 0.00s     
+201/500 | 0.010552     | N/A          | N/A          | N/A          | 0.00s     
+202/500 | 0.010449     | N/A          | N/A          | N/A          | 0.02s     
+203/500 | 0.010379     | N/A          | N/A          | N/A          | 0.00s     
+204/500 | 0.010352     | N/A          | N/A          | N/A          | 0.00s     
+205/500 | 0.010212     | N/A          | N/A          | N/A          | 0.00s     
+206/500 | 0.010104     | N/A          | N/A          | N/A          | 0.00s     
+207/500 | 0.010019     | N/A          | N/A          | N/A          | 0.00s     
+208/500 | 0.009936     | N/A          | N/A          | N/A          | 0.00s     
+209/500 | 0.009857     | N/A          | N/A          | N/A          | 0.00s     
+210/500 | 0.009851     | N/A          | N/A          | N/A          | 0.00s     
+211/500 | 0.009704     | N/A          | N/A          | N/A          | 0.00s     
+212/500 | 0.009599     | N/A          | N/A          | N/A          | 0.00s     
+213/500 | 0.009507     | N/A          | N/A          | N/A          | 0.00s     
+214/500 | 0.009417     | N/A          | N/A          | N/A          | 0.00s     
+215/500 | 0.009445     | N/A          | N/A          | N/A          | 0.00s     
+216/500 | 0.009322     | N/A          | N/A          | N/A          | 0.00s     
+217/500 | 0.009212     | N/A          | N/A          | N/A          | 0.00s     
+218/500 | 0.009125     | N/A          | N/A          | N/A          | 0.00s     
+219/500 | 0.009039     | N/A          | N/A          | N/A          | 0.00s     
+220/500 | 0.008963     | N/A          | N/A          | N/A          | 0.00s     
+221/500 | 0.008976     | N/A          | N/A          | N/A          | 0.00s     
+222/500 | 0.008852     | N/A          | N/A          | N/A          | 0.00s     
+223/500 | 0.008775     | N/A          | N/A          | N/A          | 0.00s     
+224/500 | 0.008688     | N/A          | N/A          | N/A          | 0.00s     
+225/500 | 0.008613     | N/A          | N/A          | N/A          | 0.00s     
+226/500 | 0.008559     | N/A          | N/A          | N/A          | 0.00s     
+227/500 | 0.008547     | N/A          | N/A          | N/A          | 0.00s     
+228/500 | 0.008440     | N/A          | N/A          | N/A          | 0.00s     
+229/500 | 0.008367     | N/A          | N/A          | N/A          | 0.00s     
+230/500 | 0.008289     | N/A          | N/A          | N/A          | 0.02s     
+231/500 | 0.008222     | N/A          | N/A          | N/A          | 0.00s     
+232/500 | 0.008202     | N/A          | N/A          | N/A          | 0.00s     
+233/500 | 0.008107     | N/A          | N/A          | N/A          | 0.00s     
+234/500 | 0.008073     | N/A          | N/A          | N/A          | 0.00s     
+235/500 | 0.007985     | N/A          | N/A          | N/A          | 0.00s     
+236/500 | 0.007916     | N/A          | N/A          | N/A          | 0.00s     
+237/500 | 0.007864     | N/A          | N/A          | N/A          | 0.00s     
+238/500 | 0.007834     | N/A          | N/A          | N/A          | 0.00s     
+239/500 | 0.007742     | N/A          | N/A          | N/A          | 0.00s     
+240/500 | 0.007684     | N/A          | N/A          | N/A          | 0.00s     
+241/500 | 0.007661     | N/A          | N/A          | N/A          | 0.00s     
+242/500 | 0.007581     | N/A          | N/A          | N/A          | 0.00s     
+243/500 | 0.007530     | N/A          | N/A          | N/A          | 0.00s     
+244/500 | 0.007487     | N/A          | N/A          | N/A          | 0.00s     
+245/500 | 0.007410     | N/A          | N/A          | N/A          | 0.00s     
+246/500 | 0.007352     | N/A          | N/A          | N/A          | 0.00s     
+247/500 | 0.007309     | N/A          | N/A          | N/A          | 0.00s     
+248/500 | 0.007265     | N/A          | N/A          | N/A          | 0.00s     
+249/500 | 0.007200     | N/A          | N/A          | N/A          | 0.00s     
+250/500 | 0.007140     | N/A          | N/A          | N/A          | 0.00s     
+251/500 | 0.007097     | N/A          | N/A          | N/A          | 0.00s     
+252/500 | 0.007060     | N/A          | N/A          | N/A          | 0.02s     
+253/500 | 0.007014     | N/A          | N/A          | N/A          | 0.00s     
+254/500 | 0.006958     | N/A          | N/A          | N/A          | 0.00s     
+255/500 | 0.006916     | N/A          | N/A          | N/A          | 0.00s     
+256/500 | 0.006859     | N/A          | N/A          | N/A          | 0.00s     
+257/500 | 0.006842     | N/A          | N/A          | N/A          | 0.00s     
+258/500 | 0.006768     | N/A          | N/A          | N/A          | 0.00s     
+259/500 | 0.006730     | N/A          | N/A          | N/A          | 0.00s     
+260/500 | 0.006677     | N/A          | N/A          | N/A          | 0.00s     
+261/500 | 0.006640     | N/A          | N/A          | N/A          | 0.00s     
+262/500 | 0.006595     | N/A          | N/A          | N/A          | 0.00s     
+263/500 | 0.006566     | N/A          | N/A          | N/A          | 0.00s     
+264/500 | 0.006497     | N/A          | N/A          | N/A          | 0.00s     
+265/500 | 0.006464     | N/A          | N/A          | N/A          | 0.00s     
+266/500 | 0.006417     | N/A          | N/A          | N/A          | 0.00s     
+267/500 | 0.006376     | N/A          | N/A          | N/A          | 0.00s     
+268/500 | 0.006357     | N/A          | N/A          | N/A          | 0.00s     
+269/500 | 0.006294     | N/A          | N/A          | N/A          | 0.00s     
+270/500 | 0.006249     | N/A          | N/A          | N/A          | 0.00s     
+271/500 | 0.006215     | N/A          | N/A          | N/A          | 0.00s     
+272/500 | 0.006172     | N/A          | N/A          | N/A          | 0.00s     
+273/500 | 0.006126     | N/A          | N/A          | N/A          | 0.00s     
+274/500 | 0.006099     | N/A          | N/A          | N/A          | 0.00s     
+275/500 | 0.006060     | N/A          | N/A          | N/A          | 0.00s     
+276/500 | 0.006043     | N/A          | N/A          | N/A          | 0.00s     
+277/500 | 0.005982     | N/A          | N/A          | N/A          | 0.00s     
+278/500 | 0.005950     | N/A          | N/A          | N/A          | 0.00s     
+279/500 | 0.005907     | N/A          | N/A          | N/A          | 0.00s     
+280/500 | 0.005884     | N/A          | N/A          | N/A          | 0.00s     
+281/500 | 0.005860     | N/A          | N/A          | N/A          | 0.00s     
+282/500 | 0.005801     | N/A          | N/A          | N/A          | 0.00s     
+283/500 | 0.005761     | N/A          | N/A          | N/A          | 0.00s     
+284/500 | 0.005724     | N/A          | N/A          | N/A          | 0.00s     
+285/500 | 0.005703     | N/A          | N/A          | N/A          | 0.00s     
+286/500 | 0.005670     | N/A          | N/A          | N/A          | 0.01s     
+287/500 | 0.005655     | N/A          | N/A          | N/A          | 0.00s     
+288/500 | 0.005606     | N/A          | N/A          | N/A          | 0.00s     
+289/500 | 0.005561     | N/A          | N/A          | N/A          | 0.00s     
+290/500 | 0.005524     | N/A          | N/A          | N/A          | 0.00s     
+291/500 | 0.005505     | N/A          | N/A          | N/A          | 0.00s     
+292/500 | 0.005473     | N/A          | N/A          | N/A          | 0.00s     
+293/500 | 0.005456     | N/A          | N/A          | N/A          | 0.00s     
+294/500 | 0.005406     | N/A          | N/A          | N/A          | 0.00s     
+295/500 | 0.005373     | N/A          | N/A          | N/A          | 0.00s     
+296/500 | 0.005338     | N/A          | N/A          | N/A          | 0.00s     
+297/500 | 0.005317     | N/A          | N/A          | N/A          | 0.00s     
+298/500 | 0.005305     | N/A          | N/A          | N/A          | 0.00s     
+299/500 | 0.005256     | N/A          | N/A          | N/A          | 0.00s     
+300/500 | 0.005224     | N/A          | N/A          | N/A          | 0.00s     
+301/500 | 0.005193     | N/A          | N/A          | N/A          | 0.00s     
+302/500 | 0.005161     | N/A          | N/A          | N/A          | 0.00s     
+303/500 | 0.005139     | N/A          | N/A          | N/A          | 0.00s     
+304/500 | 0.005107     | N/A          | N/A          | N/A          | 0.00s     
+305/500 | 0.005083     | N/A          | N/A          | N/A          | 0.00s     
+306/500 | 0.005069     | N/A          | N/A          | N/A          | 0.00s     
+307/500 | 0.005024     | N/A          | N/A          | N/A          | 0.00s     
+308/500 | 0.004993     | N/A          | N/A          | N/A          | 0.00s     
+309/500 | 0.004970     | N/A          | N/A          | N/A          | 0.00s     
+310/500 | 0.004945     | N/A          | N/A          | N/A          | 0.00s     
+311/500 | 0.004925     | N/A          | N/A          | N/A          | 0.00s     
+312/500 | 0.004899     | N/A          | N/A          | N/A          | 0.00s     
+313/500 | 0.004864     | N/A          | N/A          | N/A          | 0.00s     
+314/500 | 0.004833     | N/A          | N/A          | N/A          | 0.00s     
+315/500 | 0.004804     | N/A          | N/A          | N/A          | 0.00s     
+316/500 | 0.004778     | N/A          | N/A          | N/A          | 0.00s     
+317/500 | 0.004783     | N/A          | N/A          | N/A          | 0.00s     
+318/500 | 0.004745     | N/A          | N/A          | N/A          | 0.00s     
+319/500 | 0.004711     | N/A          | N/A          | N/A          | 0.00s     
+320/500 | 0.004684     | N/A          | N/A          | N/A          | 0.00s     
+321/500 | 0.004657     | N/A          | N/A          | N/A          | 0.00s     
+322/500 | 0.004632     | N/A          | N/A          | N/A          | 0.00s     
+323/500 | 0.004622     | N/A          | N/A          | N/A          | 0.00s     
+324/500 | 0.004607     | N/A          | N/A          | N/A          | 0.00s     
+325/500 | 0.004569     | N/A          | N/A          | N/A          | 0.00s     
+326/500 | 0.004541     | N/A          | N/A          | N/A          | 0.00s     
+327/500 | 0.004515     | N/A          | N/A          | N/A          | 0.00s     
+328/500 | 0.004501     | N/A          | N/A          | N/A          | 0.00s     
+329/500 | 0.004484     | N/A          | N/A          | N/A          | 0.00s     
+330/500 | 0.004452     | N/A          | N/A          | N/A          | 0.00s     
+331/500 | 0.004436     | N/A          | N/A          | N/A          | 0.00s     
+332/500 | 0.004407     | N/A          | N/A          | N/A          | 0.00s     
+333/500 | 0.004381     | N/A          | N/A          | N/A          | 0.00s     
+334/500 | 0.004357     | N/A          | N/A          | N/A          | 0.00s     
+335/500 | 0.004342     | N/A          | N/A          | N/A          | 0.00s     
+336/500 | 0.004338     | N/A          | N/A          | N/A          | 0.00s     
+337/500 | 0.004305     | N/A          | N/A          | N/A          | 0.00s     
+338/500 | 0.004277     | N/A          | N/A          | N/A          | 0.00s     
+339/500 | 0.004255     | N/A          | N/A          | N/A          | 0.00s     
+340/500 | 0.004231     | N/A          | N/A          | N/A          | 0.00s     
+341/500 | 0.004219     | N/A          | N/A          | N/A          | 0.00s     
+342/500 | 0.004213     | N/A          | N/A          | N/A          | 0.00s     
+343/500 | 0.004178     | N/A          | N/A          | N/A          | 0.02s     
+344/500 | 0.004155     | N/A          | N/A          | N/A          | 0.00s     
+345/500 | 0.004132     | N/A          | N/A          | N/A          | 0.00s     
+346/500 | 0.004115     | N/A          | N/A          | N/A          | 0.00s     
+347/500 | 0.004102     | N/A          | N/A          | N/A          | 0.00s     
+348/500 | 0.004076     | N/A          | N/A          | N/A          | 0.00s     
+349/500 | 0.004064     | N/A          | N/A          | N/A          | 0.00s     
+350/500 | 0.004043     | N/A          | N/A          | N/A          | 0.00s     
+351/500 | 0.004017     | N/A          | N/A          | N/A          | 0.00s     
+352/500 | 0.003998     | N/A          | N/A          | N/A          | 0.00s     
+353/500 | 0.003990     | N/A          | N/A          | N/A          | 0.00s     
+354/500 | 0.003970     | N/A          | N/A          | N/A          | 0.00s     
+355/500 | 0.003949     | N/A          | N/A          | N/A          | 0.00s     
+356/500 | 0.003927     | N/A          | N/A          | N/A          | 0.00s     
+357/500 | 0.003908     | N/A          | N/A          | N/A          | 0.00s     
+358/500 | 0.003887     | N/A          | N/A          | N/A          | 0.00s     
+359/500 | 0.003874     | N/A          | N/A          | N/A          | 0.00s     
+360/500 | 0.003868     | N/A          | N/A          | N/A          | 0.00s     
+361/500 | 0.003838     | N/A          | N/A          | N/A          | 0.00s     
+362/500 | 0.003821     | N/A          | N/A          | N/A          | 0.00s     
+363/500 | 0.003805     | N/A          | N/A          | N/A          | 0.00s     
+364/500 | 0.003785     | N/A          | N/A          | N/A          | 0.00s     
+365/500 | 0.003766     | N/A          | N/A          | N/A          | 0.00s     
+366/500 | 0.003762     | N/A          | N/A          | N/A          | 0.00s     
+367/500 | 0.003741     | N/A          | N/A          | N/A          | 0.00s     
+368/500 | 0.003722     | N/A          | N/A          | N/A          | 0.00s     
+369/500 | 0.003702     | N/A          | N/A          | N/A          | 0.00s     
+370/500 | 0.003688     | N/A          | N/A          | N/A          | 0.00s     
+371/500 | 0.003676     | N/A          | N/A          | N/A          | 0.00s     
+372/500 | 0.003654     | N/A          | N/A          | N/A          | 0.00s     
+373/500 | 0.003637     | N/A          | N/A          | N/A          | 0.00s     
+374/500 | 0.003627     | N/A          | N/A          | N/A          | 0.00s     
+375/500 | 0.003610     | N/A          | N/A          | N/A          | 0.00s     
+376/500 | 0.003590     | N/A          | N/A          | N/A          | 0.00s     
+377/500 | 0.003583     | N/A          | N/A          | N/A          | 0.00s     
+378/500 | 0.003561     | N/A          | N/A          | N/A          | 0.00s     
+379/500 | 0.003546     | N/A          | N/A          | N/A          | 0.00s     
+380/500 | 0.003535     | N/A          | N/A          | N/A          | 0.00s     
+381/500 | 0.003515     | N/A          | N/A          | N/A          | 0.00s     
+382/500 | 0.003499     | N/A          | N/A          | N/A          | 0.00s     
+383/500 | 0.003487     | N/A          | N/A          | N/A          | 0.00s     
+384/500 | 0.003476     | N/A          | N/A          | N/A          | 0.00s     
+385/500 | 0.003455     | N/A          | N/A          | N/A          | 0.00s     
+386/500 | 0.003440     | N/A          | N/A          | N/A          | 0.00s     
+387/500 | 0.003431     | N/A          | N/A          | N/A          | 0.00s     
+388/500 | 0.003414     | N/A          | N/A          | N/A          | 0.00s     
+389/500 | 0.003399     | N/A          | N/A          | N/A          | 0.00s     
+390/500 | 0.003391     | N/A          | N/A          | N/A          | 0.00s     
+391/500 | 0.003371     | N/A          | N/A          | N/A          | 0.00s     
+392/500 | 0.003359     | N/A          | N/A          | N/A          | 0.00s     
+393/500 | 0.003341     | N/A          | N/A          | N/A          | 0.00s     
+394/500 | 0.003328     | N/A          | N/A          | N/A          | 0.00s     
+395/500 | 0.003317     | N/A          | N/A          | N/A          | 0.00s     
+396/500 | 0.003310     | N/A          | N/A          | N/A          | 0.00s     
+397/500 | 0.003289     | N/A          | N/A          | N/A          | 0.00s     
+398/500 | 0.003274     | N/A          | N/A          | N/A          | 0.00s     
+399/500 | 0.003265     | N/A          | N/A          | N/A          | 0.00s     
+400/500 | 0.003250     | N/A          | N/A          | N/A          | 0.00s     
+401/500 | 0.003235     | N/A          | N/A          | N/A          | 0.00s     
+402/500 | 0.003230     | N/A          | N/A          | N/A          | 0.00s     
+403/500 | 0.003211     | N/A          | N/A          | N/A          | 0.00s     
+404/500 | 0.003196     | N/A          | N/A          | N/A          | 0.00s     
+405/500 | 0.003183     | N/A          | N/A          | N/A          | 0.00s     
+406/500 | 0.003175     | N/A          | N/A          | N/A          | 0.00s     
+407/500 | 0.003160     | N/A          | N/A          | N/A          | 0.00s     
+408/500 | 0.003150     | N/A          | N/A          | N/A          | 0.00s     
+409/500 | 0.003140     | N/A          | N/A          | N/A          | 0.00s     
+410/500 | 0.003122     | N/A          | N/A          | N/A          | 0.00s     
+411/500 | 0.003112     | N/A          | N/A          | N/A          | 0.00s     
+412/500 | 0.003097     | N/A          | N/A          | N/A          | 0.00s     
+413/500 | 0.003085     | N/A          | N/A          | N/A          | 0.00s     
+414/500 | 0.003078     | N/A          | N/A          | N/A          | 0.00s     
+415/500 | 0.003069     | N/A          | N/A          | N/A          | 0.00s     
+416/500 | 0.003050     | N/A          | N/A          | N/A          | 0.00s     
+417/500 | 0.003038     | N/A          | N/A          | N/A          | 0.02s     
+418/500 | 0.003029     | N/A          | N/A          | N/A          | 0.00s     
+419/500 | 0.003016     | N/A          | N/A          | N/A          | 0.00s     
+420/500 | 0.003006     | N/A          | N/A          | N/A          | 0.00s     
+421/500 | 0.002999     | N/A          | N/A          | N/A          | 0.00s     
+422/500 | 0.002982     | N/A          | N/A          | N/A          | 0.00s     
+423/500 | 0.002969     | N/A          | N/A          | N/A          | 0.00s     
+424/500 | 0.002957     | N/A          | N/A          | N/A          | 0.00s     
+425/500 | 0.002950     | N/A          | N/A          | N/A          | 0.00s     
+426/500 | 0.002940     | N/A          | N/A          | N/A          | 0.00s     
+427/500 | 0.002932     | N/A          | N/A          | N/A          | 0.00s     
+428/500 | 0.002915     | N/A          | N/A          | N/A          | 0.00s     
+429/500 | 0.002904     | N/A          | N/A          | N/A          | 0.00s     
+430/500 | 0.002894     | N/A          | N/A          | N/A          | 0.00s     
+431/500 | 0.002881     | N/A          | N/A          | N/A          | 0.00s     
+432/500 | 0.002875     | N/A          | N/A          | N/A          | 0.00s     
+433/500 | 0.002867     | N/A          | N/A          | N/A          | 0.00s     
+434/500 | 0.002852     | N/A          | N/A          | N/A          | 0.00s     
+435/500 | 0.002840     | N/A          | N/A          | N/A          | 0.00s     
+436/500 | 0.002830     | N/A          | N/A          | N/A          | 0.00s     
+437/500 | 0.002820     | N/A          | N/A          | N/A          | 0.00s     
+438/500 | 0.002811     | N/A          | N/A          | N/A          | 0.00s     
+439/500 | 0.002808     | N/A          | N/A          | N/A          | 0.00s     
+440/500 | 0.002791     | N/A          | N/A          | N/A          | 0.00s     
+441/500 | 0.002779     | N/A          | N/A          | N/A          | 0.00s     
+442/500 | 0.002768     | N/A          | N/A          | N/A          | 0.00s     
+443/500 | 0.002759     | N/A          | N/A          | N/A          | 0.00s     
+444/500 | 0.002754     | N/A          | N/A          | N/A          | 0.00s     
+445/500 | 0.002745     | N/A          | N/A          | N/A          | 0.00s     
+446/500 | 0.002732     | N/A          | N/A          | N/A          | 0.00s     
+447/500 | 0.002721     | N/A          | N/A          | N/A          | 0.00s     
+448/500 | 0.002710     | N/A          | N/A          | N/A          | 0.00s     
+449/500 | 0.002700     | N/A          | N/A          | N/A          | 0.00s     
+450/500 | 0.002696     | N/A          | N/A          | N/A          | 0.00s     
+451/500 | 0.002689     | N/A          | N/A          | N/A          | 0.00s     
+452/500 | 0.002674     | N/A          | N/A          | N/A          | 0.00s     
+453/500 | 0.002664     | N/A          | N/A          | N/A          | 0.00s     
+454/500 | 0.002654     | N/A          | N/A          | N/A          | 0.00s     
+455/500 | 0.002646     | N/A          | N/A          | N/A          | 0.00s     
+456/500 | 0.002637     | N/A          | N/A          | N/A          | 0.00s     
+457/500 | 0.002632     | N/A          | N/A          | N/A          | 0.00s     
+458/500 | 0.002621     | N/A          | N/A          | N/A          | 0.00s     
+459/500 | 0.002610     | N/A          | N/A          | N/A          | 0.00s     
+460/500 | 0.002600     | N/A          | N/A          | N/A          | 0.00s     
+461/500 | 0.002590     | N/A          | N/A          | N/A          | 0.00s     
+462/500 | 0.002585     | N/A          | N/A          | N/A          | 0.00s     
+463/500 | 0.002577     | N/A          | N/A          | N/A          | 0.00s     
+464/500 | 0.002568     | N/A          | N/A          | N/A          | 0.00s     
+465/500 | 0.002557     | N/A          | N/A          | N/A          | 0.00s     
+466/500 | 0.002548     | N/A          | N/A          | N/A          | 0.00s     
+467/500 | 0.002538     | N/A          | N/A          | N/A          | 0.00s     
+468/500 | 0.002532     | N/A          | N/A          | N/A          | 0.00s     
+469/500 | 0.002528     | N/A          | N/A          | N/A          | 0.00s     
+470/500 | 0.002516     | N/A          | N/A          | N/A          | 0.00s     
+471/500 | 0.002506     | N/A          | N/A          | N/A          | 0.00s     
+472/500 | 0.002497     | N/A          | N/A          | N/A          | 0.00s     
+473/500 | 0.002488     | N/A          | N/A          | N/A          | 0.00s     
+474/500 | 0.002481     | N/A          | N/A          | N/A          | 0.00s     
+475/500 | 0.002477     | N/A          | N/A          | N/A          | 0.00s     
+476/500 | 0.002467     | N/A          | N/A          | N/A          | 0.00s     
+477/500 | 0.002457     | N/A          | N/A          | N/A          | 0.02s     
+478/500 | 0.002448     | N/A          | N/A          | N/A          | 0.00s     
+479/500 | 0.002439     | N/A          | N/A          | N/A          | 0.00s     
+480/500 | 0.002433     | N/A          | N/A          | N/A          | 0.00s     
+481/500 | 0.002427     | N/A          | N/A          | N/A          | 0.00s     
+482/500 | 0.002420     | N/A          | N/A          | N/A          | 0.00s     
+483/500 | 0.002410     | N/A          | N/A          | N/A          | 0.00s     
+484/500 | 0.002401     | N/A          | N/A          | N/A          | 0.00s     
+485/500 | 0.002392     | N/A          | N/A          | N/A          | 0.00s     
+486/500 | 0.002387     | N/A          | N/A          | N/A          | 0.00s     
+487/500 | 0.002379     | N/A          | N/A          | N/A          | 0.00s     
+488/500 | 0.002371     | N/A          | N/A          | N/A          | 0.00s     
+489/500 | 0.002366     | N/A          | N/A          | N/A          | 0.00s     
+490/500 | 0.002356     | N/A          | N/A          | N/A          | 0.00s     
+491/500 | 0.002347     | N/A          | N/A          | N/A          | 0.00s     
+492/500 | 0.002342     | N/A          | N/A          | N/A          | 0.00s     
+493/500 | 0.002334     | N/A          | N/A          | N/A          | 0.00s     
+494/500 | 0.002326     | N/A          | N/A          | N/A          | 0.00s     
+495/500 | 0.002321     | N/A          | N/A          | N/A          | 0.00s     
+496/500 | 0.002312     | N/A          | N/A          | N/A          | 0.00s     
+497/500 | 0.002303     | N/A          | N/A          | N/A          | 0.00s     
+498/500 | 0.002298     | N/A          | N/A          | N/A          | 0.00s     
+499/500 | 0.002291     | N/A          | N/A          | N/A          | 0.00s     
+500/500 | 0.002285     | N/A          | N/A          | N/A          | 0.00s     
+
+================================================================================
+EXECUTION MATRIX SUMMARY
+================================================================================
+Total Epochs: 500
+Total Training Time: 423ms
+
+Metadata:
+  Epochs: 500
+  Batch Size: 4
+  Learning Rate: 0.5
+  Train Samples: 4
+
+Best Metrics:
+  Best Training Loss:     0.002285
+
+]]></system-out>
+  </testcase>
+  <testcase name="testModelPredictShape" classname="com.tenzor.ModelTrainingTest" time="0.015">
+    <system-out><![CDATA[================================================================================
+MODEL TRAINING
+================================================================================
+Train samples:      10
+Validation samples: None
+Epochs:             5
+Batch size:         10
+================================================================================
+
+Epoch  | Train Loss   | Val Loss     | Train Acc    | Val Acc      | Duration  
+----------------------------------------------------------------------------------------------------
+1/5    | 1.552053     | N/A          | N/A          | N/A          | 0.00s     
+2/5    | 1.309658     | N/A          | N/A          | N/A          | 0.00s     
+3/5    | 1.114112     | N/A          | N/A          | N/A          | 0.00s     
+4/5    | 0.955299     | N/A          | N/A          | N/A          | 0.00s     
+5/5    | 0.824074     | N/A          | N/A          | N/A          | 0.00s     
+
+================================================================================
+EXECUTION MATRIX SUMMARY
+================================================================================
+Total Epochs: 5
+Total Training Time: 15ms
+
+Metadata:
+  Epochs: 5
+  Batch Size: 10
+  Learning Rate: 0.01
+  Train Samples: 10
+
+Best Metrics:
+  Best Training Loss:     0.824074
+
+]]></system-out>
+  </testcase>
+  <testcase name="testLayerCompatibility" classname="com.tenzor.ModelTrainingTest" time="0.016"/>
+</testsuite>

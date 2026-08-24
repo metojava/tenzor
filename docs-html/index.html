@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenzor - Java Machine Learning Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header h2 {
+            font-size: 1.5em;
+            color: #666;
+            font-weight: 300;
+        }
+
+        header .tagline {
+            color: #764ba2;
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            color: #444;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95em;
+            margin: 0;
+        }
+
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e83e8c;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #abb2bf;
+        }
+
+        .keyword { color: #c678dd; }
+        .type { color: #61afef; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+        .number { color: #d19a66; }
+        .method { color: #61afef; }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-title {
+            font-weight: bold;
+            color: #0c5460;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .architecture-diagram {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .box {
+            display: inline-block;
+            background: white;
+            border: 2px solid #667eea;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 10px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .arrow {
+            display: inline-block;
+            color: #764ba2;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .quick-start-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .quick-start-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .quick-start-box pre {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .quick-start-box code {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .breadcrumb {
+            color: #fff;
+            padding: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+        </div>
+
+        <header>
+            <h1>Tenzor</h1>
+            <h2>Java Machine Learning Library</h2>
+            <p class="tagline">TensorFlow-like + scikit-learn-like APIs for Java developers</p>
+        </header>
+
+        <nav>
+            <h3>Tutorials & Guides</h3>
+            <ul>
+                <li><a href="api-quickref.html">API Quick Reference</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="tensorflow-api.html">TensorFlow-like API</a></li>
+                <li><a href="sklearn-api.html">scikit-learn-like API</a></li>
+                <li><a href="fashion-mnist.html">Fashion MNIST Tutorial</a></li>
+                <li><a href="time-series.html">Time Series Forecasting</a></li>
+                <li><a href="stock-prediction.html">Stock Price Prediction</a></li>
+                <li><a href="visualization.html">Visualization & Training</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <div class="section">
+                <h2>What is Tenzor?</h2>
+                <p>
+                    Tenzor is a comprehensive <strong>Java machine learning library</strong> that provides two main APIs:
+                </p>
+                <ul style="margin: 15px 0 15px 40px;">
+                    <li><strong>TensorFlow Keras-like API</strong> - For building and training neural networks</li>
+                    <li><strong>scikit-learn-like API</strong> - For traditional machine learning algorithms</li>
+                </ul>
+                
+                <div class="architecture-diagram">
+                    <div class="box">Data</div>
+                    <div class="arrow">→</div>
+                    <div class="box">Tensors</div>
+                    <div class="arrow">→</div>
+                    <div class="box">Layers / Estimators</div>
+                    <div class="arrow">→</div>
+                    <div class="box">Predictions</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-title">Why Tenzor?</div>
+                    <p>
+                        Tenzor brings the familiarity of Python ML frameworks (TensorFlow, scikit-learn) to Java developers.
+                        No Python installation required - pure Java implementation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🔢 Tensor Core</h4>
+                        <p>N-dimensional arrays with broadcasting, math operations, activation functions, and matrix operations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🧠 Neural Networks</h4>
+                        <p>Dense, Conv2D, LSTM, GRU, RNN layers, Dropout, BatchNormalization, and multiple optimizers.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌲 Traditional ML</h4>
+                        <p>Random Forest, Decision Trees, SVM, KNN, Linear Regression, Logistic Regression, and more.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Visualization</h4>
+                        <p>JFreeChart integration for training history, predictions, scatter plots, histograms, and residuals.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📈 Time Series</h4>
+                        <p>Sequence generation, technical indicators (RSI, MACD, Bollinger Bands), and stock data loading.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💾 Model Persistence</h4>
+                        <p>Save and load models in JSON format. Training checkpoints and execution matrix tracking.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Quick Start</h2>
+                
+                <h3>1. Build the Library</h3>
+                <div class="quick-start-box">
+                    <pre><code><span class="comment"># Clone or navigate to the Tenzor directory</span>
+cd tenzor
+
+<span class="comment"># Build with Maven</span>
+mvn clean package
+
+<span class="comment"># Run tests</span>
+mvn test</code></pre>
+                </div>
+
+                <h3>2. Maven Dependency</h3>
+                <pre><code><span class="comment">&lt;dependency&gt;</span>
+    <span class="comment">&lt;groupId&gt;</span>com.tenzor<span class="comment">&lt;/groupId&gt;</span>
+    <span class="comment">&lt;artifactId&gt;</span>tenzor<span class="comment">&lt;/artifactId&gt;</span>
+    <span class="comment">&lt;version&gt;</span>1.0.0<span class="comment">&lt;/version&gt;</span>
+<span class="comment">&lt;/dependency&gt;</span></code></pre>
+
+                <h3>3. Neural Network Example</h3>
+                <pre><code><span class="keyword">import</span> com.tenzor.core.Tensor;
+<span class="keyword">import</span> com.tenzor.nn.Sequential;
+<span class="keyword">import</span> com.tenzor.nn.layers.*;
+<span class="keyword">import</span> com.tenzor.nn.losses.*;
+<span class="keyword">import</span> com.tenzor.nn.optimizers.*;
+<span class="keyword">import</span> com.tenzor.training.ExecutionMatrix;
+
+<span class="comment">// Build a neural network</span>
+<span class="type">Sequential</span> model = <span class="keyword">new</span> <span class="type">Sequential</span>();
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">128</span>, <span class="string">"relu"</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dropout</span>(<span class="number">0.2</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">64</span>, <span class="string">"relu"</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">10</span>, <span class="string">"softmax"</span>));
+
+<span class="comment">// Compile the model</span>
+model.<span class="method">compile</span>(
+    <span class="keyword">new</span> <span class="type">SparseCategoricalCrossentropy</span>(), 
+    <span class="keyword">new</span> <span class="type">Adam</span>(<span class="number">0.001</span>)
+);
+
+<span class="comment">// Train - returns ExecutionMatrix for tracking</span>
+<span class="type">ExecutionMatrix</span> execMatrix = model.<span class="method">fit</span>(
+    xTrain, yTrain,    <span class="comment">// training data</span>
+    <span class="number">50</span>,                <span class="comment">// epochs</span>
+    <span class="number">32</span>,                <span class="comment">// batch size</span>
+    <span class="number">0.001</span>,             <span class="comment">// learning rate</span>
+    <span class="number">0.15</span>               <span class="comment">// validation split (15%)</span>
+);
+
+<span class="comment">// Print detailed training summary</span>
+execMatrix.<span class="method">printSummary</span>();
+execMatrix.<span class="method">printEpochTable</span>();
+
+<span class="comment">// Generate visualization</span>
+<span class="type">ChartUtils</span>.<span class="method">plotTrainingHistory</span>(
+    execMatrix.<span class="method">toHistoryMap</span>(),
+    <span class="string">"Training History"</span>,
+    <span class="string">"charts/training.png"</span>
+);
+
+<span class="comment">// Predict and evaluate</span>
+<span class="type">Tensor</span> predictions = model.<span class="method">predict</span>(xTest);
+model.<span class="method">printEvaluation</span>(xTest, yTest);</code></pre>
+
+                <h3>4. scikit-learn Style Example</h3>
+                <pre><code><span class="keyword">import</span> com.tenzor.core.Tensor;
+<span class="keyword">import</span> com.tenzor.sklearn.ensemble.*;
+<span class="keyword">import</span> com.tenzor.sklearn.preprocessing.*;
+<span class="keyword">import</span> com.tenzor.sklearn.model_selection.*;
+<span class="keyword">import</span> com.tenzor.metrics.*;
+
+<span class="comment">// Split data</span>
+<span class="type">Tensor</span>[] split = <span class="type">train_test_split</span>.<span class="method">split</span>(X, y, <span class="number">0.3</span>, <span class="number">42</span>);
+
+<span class="comment">// Preprocess</span>
+<span class="type">StandardScaler</span> scaler = <span class="keyword">new</span> <span class="type">StandardScaler</span>();
+<span class="type">Tensor</span> X_train_scaled = scaler.<span class="method">fitTransform</span>(split[<span class="number">0</span>]);
+<span class="type">Tensor</span> X_test_scaled = scaler.<span class="method">transform</span>(split[<span class="number">1</span>]);
+
+<span class="comment">// Train Random Forest</span>
+<span class="type">RandomForestClassifier</span> rf = <span class="keyword">new</span> <span class="type">RandomForestClassifier</span>(
+    <span class="number">100</span>,    <span class="comment">// n_estimators</span>
+    <span class="number">10</span>,     <span class="comment">// max_depth</span>
+    <span class="number">2</span>       <span class="comment">// min_samples_split</span>
+);
+rf.<span class="method">fit</span>(X_train_scaled, split[<span class="number">2</span>]);
+
+<span class="comment">// Predict</span>
+<span class="type">Tensor</span> predictions = rf.<span class="method">predict</span>(X_test_scaled);
+<span class="type">double</span> accuracy = <span class="type">Accuracy</span>.<span class="method">compute</span>(split[<span class="number">3</span>], predictions);
+
+<span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"Accuracy: "</span> + accuracy);</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>Project Structure</h2>
+                <pre><code>tenzor/
+├── <span class="comment">src/main/java/com/tenzor/</span>
+│   ├── <span class="type">core</span>/              <span class="comment">// Tensor, Variable, Shape, TensorMath</span>
+│   ├── <span class="type">nn</span>/               <span class="comment">// Sequential, layers, losses, optimizers</span>
+│   ├── <span class="type">sklearn</span>/          <span class="comment">// scikit-learn style estimators</span>
+│   ├── <span class="type">datasets</span>/         <span class="comment">// Built-in datasets (MNIST, FashionMNIST, etc.)</span>
+│   ├── <span class="type">timeseries</span>/       <span class="comment">// Time series utilities</span>
+│   ├── <span class="type">metrics</span>/          <span class="comment">// Evaluation metrics</span>
+│   ├── <span class="type">visualization</span>/    <span class="comment">// ChartUtils (JFreeChart)</span>
+│   ├── <span class="type">training</span>/         <span class="comment">// ExecutionMatrix</span>
+│   ├── <span class="type">io</span>/               <span class="comment">// Model saving/loading</span>
+│   ├── <span class="type">callbacks</span>/        <span class="comment">// EarlyStopping, ModelCheckpoint</span>
+│   └── <span class="type">data</span>/             <span class="comment">// Data loading</span>
+├── <span class="type">examples</span>/            <span class="comment">// Runnable example programs</span>
+├── <span class="type">docs</span>/                <span class="comment">// Markdown documentation</span>
+├── <span class="type">docs-html</span>/           <span class="comment">// This HTML tutorial</span>
+└── <span class="type">pom.xml</span>              <span class="comment">// Maven build file</span></code></pre>
+            </div>
+
+            <div class="section">
+                <h2>API Comparison</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concept</th>
+                            <th>TensorFlow (Python)</th>
+                            <th>Tenzor (Java)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sequential model</td>
+                            <td><code>tf.keras.Sequential()</code></td>
+                            <td><code>new Sequential()</code></td>
+                        </tr>
+                        <tr>
+                            <td>Dense layer</td>
+                            <td><code>Dense(128, activation='relu')</code></td>
+                            <td><code>new Dense(128, "relu")</code></td>
+                        </tr>
+                        <tr>
+                            <td>Dropout</td>
+                            <td><code>Dropout(0.2)</code></td>
+                            <td><code>new Dropout(0.2)</code></td>
+                        </tr>
+                        <tr>
+                            <td>LSTM</td>
+                            <td><code>LSTM(50, return_sequences=True)</code></td>
+                            <td><code>new LSTM(50, true)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Adam optimizer</td>
+                            <td><code>optimizer=tf.keras.optimizers.Adam()</code></td>
+                            <td><code>new Adam(0.001)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Random Forest</td>
+                            <td><code>RandomForestClassifier()</code></td>
+                            <td><code>new RandomForestClassifier()</code></td>
+                        </tr>
+                        <tr>
+                            <td>train_test_split</td>
+                            <td><code>train_test_split(X, y)</code></td>
+                            <td><code>train_test_split.split(X, y)</code></td>
+                        </tr>
+                        <tr>
+                            <td>StandardScaler</td>
+                            <td><code>StandardScaler()</code></td>
+                            <td><code>new StandardScaler()</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Next Steps</h2>
+                <p>
+                    Now that you have an overview, dive into the tutorials:
+                </p>
+                <div class="features-grid">
+                    <div class="feature-card" onclick="window.location='getting-started.html'" style="cursor:pointer;">
+                        <h4>🚀 Getting Started</h4>
+                        <p>Learn how to set up your project, understand Tensors, and build your first model.</p>
+                    </div>
+                    <div class="feature-card" onclick="window.location='tensorflow-api.html'" style="cursor:pointer;">
+                        <h4>🧠 TensorFlow-like API</h4>
+                        <p>Deep dive into neural networks: layers, optimizers, losses, and training.</p>
+                    </div>
+                    <div class="feature-card" onclick="window.location='fashion-mnist.html'" style="cursor:pointer;">
+                        <h4>👕 Fashion MNIST</h4>
+                        <p>Complete tutorial: loading data, building model, training, visualization.</p>
+                    </div>
+                    <div class="feature-card" onclick="window.location='visualization.html'" style="cursor:pointer;">
+                        <h4>📊 Visualization</h4>
+                        <p>Learn how to use ExecutionMatrix and ChartUtils for training tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Tenzor</strong> - Java Machine Learning Library</p>
+            <p>MIT License</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scikit-learn-like API - Tenzor Tutorial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .breadcrumb { color: #fff; padding: 15px 0; font-size: 0.9em; }
+        .breadcrumb a { color: #fff; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+        header h1 { font-size: 2.5em; color: #667eea; margin-bottom: 10px; }
+        header h2 { font-size: 1.2em; color: #666; font-weight: 300; }
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+        nav ul li a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+        }
+        .section { margin-bottom: 40px; }
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e83e8c;
+        }
+        pre code { background: none; padding: 0; color: #abb2bf; }
+        .keyword { color: #c678dd; }
+        .type { color: #61afef; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+        .number { color: #d19a66; }
+        .method { color: #61afef; }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-title { font-weight: bold; color: #0c5460; margin-bottom: 5px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        table tr:hover { background: #f5f5f5; }
+        .concept-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .concept-box h4 { color: #667eea; margin-bottom: 10px; }
+        footer { text-align: center; padding: 30px; color: white; }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .toc h4 { color: #667eea; margin-bottom: 15px; }
+        .toc ul { list-style: none; margin: 0; padding: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #667eea; text-decoration: none; }
+        .toc a:hover { color: #764ba2; text-decoration: underline; }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning-title { font-weight: bold; color: #856404; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &raquo; scikit-learn-like API
+        </div>
+
+        <header>
+            <h1>scikit-learn-like API Guide</h1>
+            <h2>Traditional Machine Learning in Java</h2>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="tensorflow-api.html">TensorFlow-like API</a></li>
+                <li><a href="fashion-mnist.html">Fashion MNIST</a></li>
+                <li><a href="visualization.html">Visualization</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <div class="toc">
+                <h4>Table of Contents</h4>
+                <ul>
+                    <li><a href="#overview">1. Overview</a></li>
+                    <li><a href="#workflow">2. Typical Workflow</a></li>
+                    <li><a href="#preprocessing">3. Preprocessing</a></li>
+                    <li><a href="#classifiers">4. Classifiers</a></li>
+                    <li><a href="#regressors">5. Regressors</a></li>
+                    <li><a href="#model-selection">6. Model Selection</a></li>
+                    <li><a href="#pca">7. PCA & Dimensionality Reduction</a></li>
+                    <li><a href="#metrics">8. Metrics</a></li>
+                </ul>
+            </div>
+
+            <div class="section" id="overview">
+                <h2>1. Overview</h2>
+
+                <div class="info">
+                    <div class="info-title">What is the scikit-learn-like API?</div>
+                    <p>
+                        Tenzor provides a familiar <strong>scikit-learn-like</strong> API for traditional machine learning algorithms.
+                        This includes classification, regression, preprocessing, model selection, and dimensionality reduction.
+                    </p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr><th>Category</th><th>Algorithms</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Classification</strong></td><td>Logistic Regression, Random Forest, Decision Tree, SVM, KNN, AdaBoost, Gradient Boosting</td></tr>
+                        <tr><td><strong>Regression</strong></td><td>Linear, Ridge, Lasso, ElasticNet, Random Forest, Decision Tree, SVM, KNN, Gradient Boosting</td></tr>
+                        <tr><td><strong>Preprocessing</strong></td><td>StandardScaler, MinMaxScaler, RobustScaler, Normalizer, OneHotEncoder, LabelEncoder, SimpleImputer</td></tr>
+                        <tr><td><strong>Model Selection</strong></td><td>train_test_split, KFold, StratifiedKFold, GridSearchCV, cross_val_score</td></tr>
+                        <tr><td><strong>Decomposition</strong></td><td>PCA, IncrementalPCA</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" id="workflow">
+                <h2>2. Typical Workflow</h2>
+
+                <div class="concept-box">
+                    <h4>Standard ML Pipeline</h4>
+                    <pre><code><span class="comment">// 1. Load data</span>
+<span class="type">Iris</span> iris = <span class="keyword">new</span> <span class="type">Iris</span>();
+<span class="type">Tensor</span> X = iris.<span class="method">getFeatures</span>();
+<span class="type">Tensor</span> y = iris.<span class="method">getTarget</span>();
+
+<span class="comment">// 2. Split data</span>
+<span class="type">Tensor</span>[] split = <span class="type">train_test_split</span>.<span class="method">split</span>(X, y, <span class="number">0.3</span>, <span class="number">42</span>);
+
+<span class="comment">// 3. Preprocess</span>
+<span class="type">StandardScaler</span> scaler = <span class="keyword">new</span> <span class="type">StandardScaler</span>();
+<span class="type">Tensor</span> X_train = scaler.<span class="method">fitTransform</span>(split[<span class="number">0</span>]);
+<span class="type">Tensor</span> X_test = scaler.<span class="method">transform</span>(split[<span class="number">1</span>]);
+
+<span class="comment">// 4. Train model</span>
+<span class="type">RandomForestClassifier</span> model = <span class="keyword">new</span> <span class="type">RandomForestClassifier</span>(<span class="number">100</span>, <span class="number">10</span>, <span class="number">2</span>);
+model.<span class="method">fit</span>(X_train, split[<span class="number">2</span>]);
+
+<span class="comment">// 5. Predict</span>
+<span class="type">Tensor</span> predictions = model.<span class="method">predict</span>(X_test);
+
+<span class="comment">// 6. Evaluate</span>
+<span class="type">double</span> accuracy = <span class="type">Accuracy</span>.<span class="method">compute</span>(split[<span class="number">3</span>], predictions);</code></pre>
+                </div>
+            </div>
+
+            <div class="section" id="preprocessing">
+                <h2>3. Preprocessing</h2>
+
+                <h3>3.1: Scalers</h3>
+
+                <table>
+                    <thead>
+                        <tr><th>Scaler</th><th>Purpose</th><th>When to Use</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>StandardScaler</strong></td>
+                            <td>Standardize features by removing mean and scaling to unit variance</td>
+                            <td>Most algorithms (SVM, KNN, Neural Networks)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MinMaxScaler</strong></td>
+                            <td>Scale to [0, 1] range</td>
+                            <td>Neural networks, bounded range needed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RobustScaler</strong></td>
+                            <td>Robust to outliers using median and quartiles</td>
+                            <td>Data with outliers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Normalizer</strong></td>
+                            <td>Scale samples to have unit norm</td>
+                            <td>Text processing, sparse data</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <pre><code><span class="comment">// StandardScaler example</span>
+<span class="type">StandardScaler</span> scaler = <span class="keyword">new</span> <span class="type">StandardScaler</span>();
+<span class="type">Tensor</span> X_train_scaled = scaler.<span class="method">fitTransform</span>(X_train);
+<span class="type">Tensor</span> X_test_scaled = scaler.<span class="method">transform</span>(X_test);
+
+<span class="comment">// MinMaxScaler example</span>
+<span class="type">MinMaxScaler</span> mmScaler = <span class="keyword">new</span> <span class="type">MinMaxScaler</span>(<span class="number">0.0</span>, <span class="number">1.0</span>);
+
+<span class="comment">// RobustScaler example</span>
+<span class="type">RobustScaler</span> rScaler = <span class="keyword">new</span> <span class="type">RobustScaler</span>();</code></pre>
+
+                <h3>3.2: Encoders</h3>
+
+                <pre><code><span class="comment">// OneHotEncoder for categorical features</span>
+<span class="type">OneHotEncoder</span> encoder = <span class="keyword">new</span> <span class="type">OneHotEncoder</span>();
+<span class="type">Tensor</span> encoded = encoder.<span class="method">fitTransform</span>(categories);
+
+<span class="comment">// LabelEncoder for target labels</span>
+<span class="type">LabelEncoder</span> labelEncoder = <span class="keyword">new</span> <span class="type">LabelEncoder</span>();
+<span class="type">Tensor</span> labels = labelEncoder.<span class="method">fitTransform</span>(stringLabels);</code></pre>
+
+                <h3>3.3: Polynomial Features</h3>
+
+                <pre><code><span class="comment">// Create polynomial features up to degree 2</span>
+<span class="type">PolynomialFeatures</span> poly = <span class="keyword">new</span> <span class="type">PolynomialFeatures</span>(<span class="number">2</span>);
+<span class="type">Tensor</span> X_poly = poly.<span class="method">fitTransform</span>(X);
+
+<span class="comment">// Example: [a, b] becomes [1, a, b, a², a*b, b²</span></code></pre>
+            </div>
+
+            <div class="section" id="classifiers">
+                <h2>4. Classifiers</h2>
+
+                <table>
+                    <thead>
+                        <tr><th>Classifier</th><th>Constructor</th><th>Key Parameters</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LogisticRegression</strong></td>
+                            <td><code>new LogisticRegression(lr, maxIter)</code></td>
+                            <td>learningRate, maxIterations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RandomForestClassifier</strong></td>
+                            <td><code>new RandomForestClassifier(nEst, maxDepth, minSplit)</code></td>
+                            <td>n_estimators, max_depth, min_samples_split</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DecisionTreeClassifier</strong></td>
+                            <td><code>new DecisionTreeClassifier(maxDepth, minSplit)</code></td>
+                            <td>max_depth, min_samples_split</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SVC</strong></td>
+                            <td><code>new SVC(C, kernel)</code></td>
+                            <td>C (regularization), kernel ("rbf", "linear", "poly", "sigmoid")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>KNeighborsClassifier</strong></td>
+                            <td><code>new KNeighborsClassifier(nNeighbors)</code></td>
+                            <td>n_neighbors</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AdaBoostClassifier</strong></td>
+                            <td><code>new AdaBoostClassifier(nEstimators)</code></td>
+                            <td>n_estimators</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>4.1: Random Forest Example</h3>
+
+                <pre><code><span class="comment">// Create and train Random Forest</span>
+<span class="type">RandomForestClassifier</span> rf = <span class="keyword">new</span> <span class="type">RandomForestClassifier</span>(
+    <span class="number">100</span>,  <span class="comment">// n_estimators: number of trees</span>
+    <span class="number">10</span>,   <span class="comment">// max_depth: maximum tree depth</span>
+    <span class="number">2</span>     <span class="comment">// min_samples_split</span>
+);
+
+rf.<span class="method">fit</span>(X_train, y_train);
+
+<span class="comment">// Predict and evaluate</span>
+<span class="type">Tensor</span> predictions = rf.<span class="method">predict</span>(X_test);
+<span class="type">double</span> accuracy = <span class="type">Accuracy</span>.<span class="method">compute</span>(y_test, predictions);</code></pre>
+
+                <h3>4.2: Classifier Comparison Example</h3>
+
+                <pre><code><span class="type">Map</span><<span class="type">String</span>, <span class="type">Double</span>> results = <span class="keyword">new</span> <span class="type">LinkedHashMap</span><>();
+
+<span class="comment">// Logistic Regression</span>
+<span class="type">LogisticRegression</span> logReg = <span class="keyword">new</span> <span class="type">LogisticRegression</span>(<span class="number">0.01</span>, <span class="number">1000</span>);
+logReg.<span class="method">fit</span>(X_train, y_train);
+results.<span class="method">put</span>(<span class="string">"Logistic Regression"</span>, 
+    <span class="type">Accuracy</span>.<span class="method">compute</span>(y_test, logReg.<span class="method">predict</span>(X_test)));
+
+<span class="comment">// SVM</span>
+<span class="type">SVC</span> svc = <span class="keyword">new</span> <span class="type">SVC</span>(<span class="number">1.0</span>, <span class="string">"rbf"</span>);
+svc.<span class="method">fit</span>(X_train, y_train);
+results.<span class="method">put</span>(<span class="string">"SVM"</span>, 
+    <span class="type">Accuracy</span>.<span class="method">compute</span>(y_test, svc.<span class="method">predict</span>(y_test)));
+
+<span class="comment">// KNN</span>
+<span class="type">KNeighborsClassifier</span> knn = <span class="keyword">new</span> <span class="type">KNeighborsClassifier</span>(<span class="number">5</span>);
+knn.<span class="method">fit</span>(X_train, y_train);
+results.<span class="method">put</span>(<span class="string">"KNN"</span>, 
+    <span class="type">Accuracy</span>.<span class="method">compute</span>(y_test, knn.<span class="method">predict</span>(X_test)));
+
+<span class="comment">// Print results</span>
+<span class="keyword">for</span> (<span class="type">Map.Entry</span><<span class="type">String</span>, <span class="type">Double</span>> entry : results.<span class="method">entrySet</span>()) {
+    <span class="type">System</span>.out.<span class="method">printf</span>(<span class="string">"%s: %.4f%n</span>, entry.<span class="method">getKey</span>(), entry.<span class="method">getValue</span>());
+}</code></pre>
+            </div>
+
+            <div class="section" id="regressors">
+                <h2>5. Regressors</h2>
+
+                <table>
+                    <thead>
+                        <tr><th>Regressor</th><th>Use Case</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>LinearRegression</strong></td><td>Simple linear regression</td></tr>
+                        <tr><td><strong>Ridge</strong></td><td>Linear with L2 regularization</td></tr>
+                        <tr><td><strong>Lasso</strong></td><td>Linear with L1 regularization (feature selection)</td></tr>
+                        <tr><td><strong>ElasticNet</strong></td><td>Combines L1 and L2</td></tr>
+                        <tr><td><strong>RandomForestRegressor</strong></td><td>Ensemble of regression trees</td></tr>
+                        <tr><td><strong>SVR</strong></td><td>Support Vector Regression</td></tr>
+                        <tr><td><strong>KNeighborsRegressor</strong></td><td>K-nearest neighbors regression</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>5.1: Linear Regression Example</h3>
+
+                <pre><code><span class="comment">// Load Boston Housing data</span>
+<span class="type">BostonHousing</span> boston = <span class="keyword">new</span> <span class="type">BostonHousing</span>();
+<span class="type">Tensor</span> X = boston.<span class="method">getFeatures</span>();
+<span class="type">Tensor</span> y = boston.<span class="method">getTarget</span>();
+
+<span class="comment">// Split and preprocess</span>
+<span class="type">Tensor</span>[] split = <span class="type">train_test_split</span>.<span class="method">split</span>(X, y, <span class="number">0.3</span>, <span class="number">42</span>);
+
+<span class="type">StandardScaler</span> scaler = <span class="keyword">new</span> <span class="type">StandardScaler</span>();
+<span class="type">Tensor</span> X_train = scaler.<span class="method">fitTransform</span>(split[<span class="number">0</span>]);
+<span class="type">Tensor</span> X_test = scaler.<span class="method">transform</span>(split[<span class="number">1</span>]);
+
+<span class="comment">// Train Linear Regression</span>
+<span class="type">LinearRegression</span> lr = <span class="keyword">new</span> <span class="type">LinearRegression</span>();
+lr.<span class="method">fit</span>(X_train, split[<span class="number">2</span>]);
+
+<span class="comment">// Predict</span>
+<span class="type">Tensor</span> predictions = lr.<span class="method">predict</span>(X_test);
+
+<span class="comment">// Evaluate</span>
+<span class="type">double</span> mse = <span class="type">MeanSquaredError</span>.<span class="method">compute</span>(split[<span class="number">3</span>], predictions);
+<span class="type">double</span> r2 = <span class="type">R2Score</span>.<span class="method">compute</span>(split[<span class="number">3</span>], predictions);
+
+<span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"MSE: "</span> + mse);
+<span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"R²: "</span> + r2);</code></pre>
+
+                <h3>5.2: Regularized Regression</h3>
+
+                <pre><code><span class="comment">// Ridge Regression (L2)</span>
+<span class="type">Ridge</span> ridge = <span class="keyword">new</span> <span class="type">Ridge</span>(<span class="number">1.0</span>);  <span class="comment">// alpha = regularization strength</span>
+
+<span class="comment">// Lasso Regression (L1)</span>
+<span class="type">Lasso</span> lasso = <span class="keyword">new</span> <span class="type">Lasso</span>(<span class="number">0.1</span>);
+
+<span class="comment">// ElasticNet (L1 + L2)</span>
+<span class="type">ElasticNet</span> enet = <span class="keyword">new</span> <span class="type">ElasticNet</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);  <span class="comment">// alpha, l1_ratio</span></code></pre>
+            </div>
+
+            <div class="section" id="model-selection">
+                <h2>6. Model Selection</h2>
+
+                <h3>6.1: train_test_split</h3>
+
+                <pre><code><span class="comment">// Basic split (70% train, 30% test)</span>
+<span class="type">Tensor</span>[] split = <span class="type">train_test_split</span>.<span class="method">split</span>(X, y, <span class="number">0.3</span>, <span class="number">42</span>);
+
+<span class="comment">// split[0] = X_train</span>
+<span class="comment">// split[1] = X_test</span>
+<span class="comment">// split[2] = y_train</span>
+<span class="comment">// split[3] = y_test</span>
+
+<span class="comment">// With stratification (for classification)</span>
+<span class="type">StratifiedKFold</span> skf = <span class="keyword">new</span> <span class="type">StratifiedKFold</span>(<span class="number">5</span>, <span class="number">42</span>);</code></pre>
+
+                <h3>6.2: K-Fold Cross-Validation</h3>
+
+                <pre><code><span class="comment">// 5-fold CV</span>
+<span class="type">KFold</span> kfold = <span class="keyword">new</span> <span class="type">KFold</span>(<span class="number">5</span>, <span class="number">42</span>);
+<span class="type">List</span><<span class="type">Tensor</span>[]> folds = kfold.<span class="method">split</span>(X, y);
+
+<span class="type">double</span>[] scores = <span class="keyword">new</span> <span class="type">double</span>[folds.<span class="method">size</span>()];
+
+<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i < folds.<span class="method">size</span>(); i++) {
+    <span class="type">Tensor</span>[] fold = folds.<span class="method">get</span>(i);
+    
+    <span class="comment">// fold[0] = X_train for this fold</span>
+    <span class="comment">// fold[1] = X_test for this fold</span>
+    <span class="comment">// fold[2] = y_train for this fold</span>
+    <span class="comment">// fold[3] = y_test for this fold</span>
+    
+    <span class="type">RandomForestClassifier</span> model = <span class="keyword">new</span> <span class="type">RandomForestClassifier</span>(<span class="number">100</span>, <span class="number">10</span>, <span class="number">2</span>);
+    model.<span class="method">fit</span>(fold[<span class="number">0</span>], fold[<span class="number">2</span>]);
+    
+    scores[i] = <span class="type">Accuracy</span>.<span class="method">compute</span>(fold[<span class="number">3</span>], model.<span class="method">predict</span>(fold[<span class="number">1</span>]));
+}
+
+<span class="type">double</span> meanScore = <span class="type">Arrays</span>.<span class="method">stream</span>(scores).<span class="method">average</span>().<span class="method">getAsDouble</span>();
+<span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"Mean CV Accuracy: "</span> + meanScore);</code></pre>
+            </div>
+
+            <div class="section" id="pca">
+                <h2>7. PCA & Dimensionality Reduction</h2>
+
+                <h3>7.1: Principal Component Analysis</h3>
+
+                <pre><code><span class="comment">// Create PCA with 2 components</span>
+<span class="type">PCA</span> pca = <span class="keyword">new</span> <span class="type">PCA</span>(<span class="number">2</span>);
+
+<span class="comment">// Fit and transform</span>
+<span class="type">Tensor</span> X_pca = pca.<span class="method">fitTransform</span>(X);
+
+<span class="comment">// Explained variance</span>
+<span class="type">double</span>[] varianceRatio = pca.<span class="method">getExplainedVarianceRatio</span>();
+<span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"Explained variance: "</span> + <span class="type">Arrays</span>.<span class="method">toString</span>(varianceRatio));
+
+<span class="comment">// Visualize with scatter plot</span>
+<span class="type">double</span>[] pc1 = X_pca.<span class="method">slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>).<span class="method">getData</span>();
+<span class="type">double</span>[] pc2 = X_pca.<span class="method">slice</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>).<span class="method">getData</span>();
+
+<span class="type">ChartUtils</span>.<span class="method">plotScatter</span>(pc1, pc2, 
+    <span class="string">"PCA Visualization"</span>,
+    <span class="string">"PC1"</span>, <span class="string">"PC2"</span>,
+    <span class="string">"output/pca.png"</span>);</code></pre>
+
+                <div class="info">
+                    <div class="info-title">When to use PCA?</div>
+                    <ul>
+                        <li><strong>Visualization</strong>: Reduce high-dimensional data to 2D/3D</li>
+                        <li><strong>Speed</strong>: Reduce feature count before training</li>
+                        <li><strong>Noise reduction</strong>: Remove noisy features</li>
+                        <li><strong>Before</strong>: Always scale your data before PCA!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="metrics">
+                <h2>8. Metrics</h2>
+
+                <h3>8.1: Classification Metrics</h3>
+
+                <table>
+                    <thead>
+                        <tr><th>Metric</th><th>Formula/Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Accuracy</strong></td><td>(TP + TN) / (TP + TN + FP + FN)</td></tr>
+                        <tr><td><strong>Precision</strong></td><td>TP / (TP + FP) - how many predicted positives are correct</td></tr>
+                        <tr><td><strong>Recall</strong></td><td>TP / (TP + FN) - how many actual positives found</td></tr>
+                        <tr><td><strong>F1 Score</strong></td><td>2 * (Precision * Recall) / (Precision + Recall)</td></tr>
+                    </tbody>
+                </table>
+
+                <pre><code><span class="type">double</span> accuracy = <span class="type">Accuracy</span>.<span class="method">compute</span>(y_true, y_pred);
+<span class="type">double</span> precision = <span class="type">Precision</span>.<span class="method">compute</span>(y_true, y_pred);
+<span class="type">double</span> recall = <span class="type">Recall</span>.<span class="method">compute</span>(y_true, y_pred);
+<span class="type">double</span> f1 = <span class="type">F1Score</span>.<span class="method">compute</span>(y_true, y_pred);</code></pre>
+
+                <h3>8.2: Regression Metrics</h3>
+
+                <table>
+                    <thead>
+                        <tr><th>Metric</th><th>Formula</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>MSE</strong></td><td>mean((y_true - y_pred)²)</td></tr>
+                        <tr><td><strong>MAE</strong></td><td>mean(|y_true - y_pred|)</td></tr>
+                        <tr><td><strong>MAPE</strong></td><td>mean(|(y_true - y_pred)/y_true|) * 100</td></tr>
+                        <tr><td><strong>R² Score</strong></td><td>1 - (SS_res / SS_tot)</td></tr>
+                    </tbody>
+                </table>
+
+                <pre><code><span class="type">double</span> mse = <span class="type">MeanSquaredError</span>.<span class="method">compute</span>(y_true, y_pred);
+<span class="type">double</span> mae = <span class="type">MeanAbsoluteError</span>.<span class="method">compute</span>(y_true, y_pred);
+<span class="type">double</span> mape = <span class="type">MeanAbsolutePercentageError</span>.<span class="method">compute</span>(y_true, y_pred);
+<span class="type">double</span> r2 = <span class="type">R2Score</span>.<span class="method">compute</span>(y_true, y_pred);</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>Next Steps</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='tensorflow-api.html'">
+                        <h4>TensorFlow-like API</h4>
+                        <p>Learn about the neural network API for deep learning.</p>
+                    </div>
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='visualization.html'">
+                        <h4>Visualization</h4>
+                        <p>Learn how to visualize model comparisons and results.</p>
+                    </div>
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='time-series.html'">
+                        <h4>Time Series</h4>
+                        <p>Learn about time series forecasting with LSTMs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Tenzor</strong> - Java Machine Learning Library</p>
+        </footer>
+    </div>
+</body>
+</html>

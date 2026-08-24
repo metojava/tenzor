@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization & Training - Tenzor Tutorial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .breadcrumb { color: #fff; padding: 15px 0; font-size: 0.9em; }
+        .breadcrumb a { color: #fff; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+        header h1 { font-size: 2.5em; color: #667eea; margin-bottom: 10px; }
+        header h2 { font-size: 1.2em; color: #666; font-weight: 300; }
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+        nav ul li a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+        }
+        .section { margin-bottom: 40px; }
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e83e8c;
+        }
+        pre code { background: none; padding: 0; color: #abb2bf; }
+        .keyword { color: #c678dd; }
+        .type { color: #61afef; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+        .number { color: #d19a66; }
+        .method { color: #61afef; }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-title { font-weight: bold; color: #0c5460; margin-bottom: 5px; }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning-title { font-weight: bold; color: #856404; margin-bottom: 5px; }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .success-title { font-weight: bold; color: #155724; margin-bottom: 5px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        table tr:hover { background: #f5f5f5; }
+        .concept-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .concept-box h4 { color: #667eea; margin-bottom: 10px; }
+        footer { text-align: center; padding: 30px; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &raquo; Visualization & Training Tracking
+        </div>
+
+        <header>
+            <h1>Visualization & Training Tracking</h1>
+            <h2>Using ChartUtils and ExecutionMatrix to monitor your models</h2>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="tensorflow-api.html">TensorFlow API</a></li>
+                <li><a href="fashion-mnist.html">Fashion MNIST</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <div class="section">
+                <h2>1. Overview</h2>
+
+                <p>
+                    Tenzor provides powerful tools for tracking training progress and visualizing results:
+                </p>
+
+                <div class="concept-box">
+                    <h4>Two Key Components</h4>
+                    <table style="width: 100%; margin: 10px 0;">
+                        <thead>
+                            <tr><th>Class</th><th>Purpose</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>ExecutionMatrix</strong></td><td>Tracks training metrics epoch-by-epoch</td></tr>
+                            <tr><td><strong>ChartUtils</strong></td><td>Generates visualizations using JFreeChart</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2. ExecutionMatrix</h2>
+
+                <p>
+                    The <code>ExecutionMatrix</code> is returned by <code>model.fit()</code> and contains
+                    comprehensive information about your training run.
+                </p>
+
+                <h3>2.1: What's Recorded</h3>
+
+                <pre><code><span class="type">ExecutionMatrix</span> execMatrix = model.<span class="method">fit</span>(
+    xTrain, yTrain, <span class="number">50</span>, <span class="number">32</span>, <span class="number">0.001</span>, <span class="number">0.15</span>
+);
+
+<span class="comment">// Print summary</span>
+execMatrix.<span class="method">printSummary</span>();
+
+<span class="comment">// Print detailed epoch table</span>
+execMatrix.<span class="method">printEpochTable</span>();</code></pre>
+
+                <div class="success">
+                    <div class="success-title">Example Output</div>
+                    <pre><code>================================================================================
+EXECUTION MATRIX SUMMARY
+================================================================================
+Total Epochs: 50
+Total Training Time: 12.45s
+
+Metadata:
+  Epochs: 50
+  Batch Size: 32
+  Learning Rate: 0.001
+  Train Samples: 51000
+  Validation Samples: 9000
+
+Best Metrics:
+  Best Training Loss:     0.023456
+  Best Validation Loss:   0.087654 (epoch 34)
+  Best Training Accuracy: 0.9876 (98.76%)
+  Best Validation Acc:    0.9234 (92.34%) (epoch 35)</code></pre>
+                </div>
+
+                <h3>2.2: Useful Methods</h3>
+
+                <table>
+                    <thead>
+                        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>getBestTrainLoss()</code></td><td><code>double</code></td><td>Lowest training loss</td></tr>
+                        <tr><td><code>getBestValidationLoss()</code></td><td><code>double</code></td><td>Lowest validation loss</td></tr>
+                        <tr><td><code>getBestTrainAccuracy()</code></td><td><code>double</code></td><td>Highest training accuracy</td></tr>
+                        <tr><td><code>getBestValidationAccuracy()</code></td><td><code>double</code></td><td>Highest validation accuracy</td></tr>
+                        <tr><td><code>getEpochWithBestValLoss()</code></td><td><code>int</code></td><td>Epoch with best validation</td></tr>
+                        <tr><td><code>getTotalTrainingTimeMs()</code></td><td><code>long</code></td><td>Total training duration</td></tr>
+                        <tr><td><code>getNumEpochs()</code></td><td><code>int</code></td><td>Number of epochs completed</td></tr>
+                        <tr><td><code>toHistoryMap()</code></td><td><code>Map</code></td><td>Format for ChartUtils</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>2.3: Exporting Data</h3>
+
+                <pre><code><span class="comment">// Export to CSV for analysis in Excel, Python, etc.</span>
+execMatrix.<span class="method">exportToCSV</span>(<span class="string">"training/training_log.csv"</span>);
+
+<span class="comment">// Save binary format for later loading</span>
+execMatrix.<span class="method">save</span>(<span class="string">"training/exec_matrix.bin"</span>);
+
+<span class="comment">// Load later</span>
+<span class="type">ExecutionMatrix</span> loaded = <span class="type">ExecutionMatrix</span>.<span class="method">load</span>(<span class="string">"training/exec_matrix.bin"</span>);</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>3. ChartUtils</h2>
+
+                <p>
+                    <code>ChartUtils</code> provides static methods to generate various types of charts
+                    using the JFreeChart library. All charts are saved as PNG or JPEG files.
+                </p>
+
+                <h3>3.1: Training History Plots</h3>
+
+                <pre><code><span class="keyword">import</span> com.tenzor.visualization.ChartUtils;
+
+<span class="comment">// Plot loss/accuracy curves</span>
+<span class="type">ChartUtils</span>.<span class="method">plotTrainingHistory</span>(
+    execMatrix.<span class="method">toHistoryMap</span>(),  <span class="comment">// Data from ExecutionMatrix</span>
+    <span class="string">"Model Training History"</span>,             <span class="comment">// Chart title</span>
+    <span class="string">"charts/training_history.png"</span>,        <span class="comment">// Output file</span>
+    <span class="number">1000</span>,                               <span class="comment">// Width (optional)</span>
+    <span class="number">600</span>                                 <span class="comment">// Height (optional)</span>
+);</code></pre>
+
+                <div class="info">
+                    <div class="info-title">What's Plotted</div>
+                    <p>
+                        This method will plot all available metrics from the history map:
+                    </p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>loss</strong> - Training loss curve</li>
+                        <li><strong>val_loss</strong> - Validation loss curve (if available)</li>
+                        <li><strong>accuracy</strong> - Training accuracy (if available)</li>
+                        <li><strong>val_accuracy</strong> - Validation accuracy (if available)</li>
+                    </ul>
+                </div>
+
+                <h3>3.2: Predictions vs Actual</h3>
+
+                <pre><code><span class="type">Tensor</span> predictions = model.<span class="method">predict</span>(xTest);
+<span class="type">double</span>[] actual = yTest.<span class="method">getData</span>();
+<span class="type">double</span>[] predicted = predictions.<span class="method">getData</span>();
+
+<span class="type">ChartUtils</span>.<span class="method">plotPredictions</span>(
+    actual,
+    predicted,
+    <span class="string">"Predictions vs Actual Values"</span>,
+    <span class="string">"charts/predictions.png"</span>
+);</code></pre>
+
+                <h3>3.3: Time Series Visualization</h3>
+
+                <pre><code><span class="type">double</span>[] timeSeriesData = loadStockPrices();
+
+<span class="type">ChartUtils</span>.<span class="method">plotTimeSeries</span>(
+    timeSeriesData,
+    <span class="string">"Stock Price Over Time"</span>,
+    <span class="string">"charts/stock_prices.png"</span>
+);</code></pre>
+
+                <h3>3.4: Bar Charts for Model Comparison</h3>
+
+                <pre><code><span class="type">String</span>[] modelNames = {<span class="string">"Logistic Regression"</span>, <span class="string">"Random Forest"</span>, 
+                          <span class="string">"SVM"</span>, <span class="string">"KNN"</span>};
+<span class="type">double</span>[] accuracies = {<span class="number">0.85</span>, <span class="number">0.92</span>, <span class="number">0.89</span>, <span class="number">0.87</span>};
+
+<span class="type">ChartUtils</span>.<span class="method">plotBarChart</span>(
+    modelNames,
+    accuracies,
+    <span class="string">"Model Accuracy Comparison"</span>,
+    <span class="string">"Model"</span>,
+    <span class="string">"Accuracy"</span>,
+    <span class="string">"charts/model_comparison.png"</span>
+);</code></pre>
+
+                <h3>3.5: Scatter Plots</h3>
+
+                <pre><code><span class="comment">// Useful for PCA visualization, residual plots, etc.</span>
+<span class="type">ChartUtils</span>.<span class="method">plotScatter</span>(
+    xValues,           <span class="comment">// X coordinates</span>
+    yValues,           <span class="comment">// Y coordinates</span>
+    <span class="string">"PCA Visualization"</span>,
+    <span class="string">"Principal Component 1"</span>,
+    <span class="string">"Principal Component 2"</span>,
+    <span class="string">"charts/pca_scatter.png"</span>
+);</code></pre>
+
+                <h3>3.6: Residual Plots</h3>
+
+                <pre><code><span class="comment">// Residuals = actual - predicted</span>
+<span class="type">ChartUtils</span>.<span class="method">plotResiduals</span>(
+    actual,
+    predicted,
+    <span class="string">"Regression Residuals"</span>,
+    <span class="string">"charts/residuals.png"</span>
+);</code></pre>
+
+                <h3>3.7: Histograms</h3>
+
+                <pre><code><span class="type">double</span>[] errorData = calculateErrors();
+
+<span class="type">ChartUtils</span>.<span class="method">plotHistogram</span>(
+    errorData,
+    <span class="string">"Error Distribution"</span>,
+    <span class="string">"Error Value"</span>,
+    <span class="string">"charts/error_histogram.png"</span>,
+    <span class="number">30</span>  <span class="comment">// Number of bins</span>
+);</code></pre>
+
+                <h3>3.8: Multiple Metrics on One Chart</h3>
+
+                <pre><code><span class="comment">// Compare multiple time series on one chart</span>
+<span class="type">List</span><<span class="type">double</span>[]> seriesData = <span class="keyword">new</span> <span class="type">ArrayList</span><>();
+seriesData.<span class="method">add</span>(stockPrices);
+seriesData.<span class="method">add</span>(sma5);
+seriesData.<span class="method">add</span>(sma20);
+
+<span class="type">List</span><<span class="type">String</span>> seriesNames = <span class="keyword">new</span> <span class="type">ArrayList</span><>();
+seriesNames.<span class="method">add</span>(<span class="string">"Price"</span>);
+seriesNames.<span class="method">add</span>(<span class="string">"SMA 5"</span>);
+seriesNames.<span class="method">add</span>(<span class="string">"SMA 20"</span>);
+
+<span class="type">ChartUtils</span>.<span class="method">plotMultipleMetrics</span>(
+    seriesData,
+    seriesNames,
+    <span class="string">"Stock Price with Moving Averages"</span>,
+    <span class="string">"Time"</span>,
+    <span class="string">"Price"</span>,
+    <span class="string">"charts/price_with_sma.png"</span>
+);</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>4. Complete Workflow Example</h2>
+
+                <p>Here's a complete example showing how to use both <code>ExecutionMatrix</code> and <code>ChartUtils</code>:</p>
+
+                <pre><code><span class="keyword">package</span> com.tenzor.examples;
+
+<span class="keyword">import</span> com.tenzor.core.Tensor;
+<span class="keyword">import</span> com.tenzor.datasets.FashionMNIST;
+<span class="keyword">import</span> com.tenzor.nn.Sequential;
+<span class="keyword">import</span> com.tenzor.nn.layers.*;
+<span class="keyword">import</span> com.tenzor.nn.losses.*;
+<span class="keyword">import</span> com.tenzor.nn.optimizers.*;
+<span class="keyword">import</span> com.tenzor.training.ExecutionMatrix;
+<span class="keyword">import</span> com.tenzor.visualization.ChartUtils;
+<span class="keyword">import</span> com.tenzor.callbacks.*;
+<span class="keyword">import</span> com.tenzor.metrics.Accuracy;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.nio.file.*;
+
+<span class="keyword">public class</span> <span class="type">VisualizationExample</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="type">String</span>[] args) <span class="keyword">throws</span> <span class="type">Exception</span> {
+        
+        <span class="comment">// Create output directory</span>
+        <span class="type">String</span> outputDir = <span class="string">"output/fashion_mnist_visual"</span>;
+        <span class="type">Files</span>.<span class="method">createDirectories</span>(<span class="type">Paths</span>.<span class="method">get</span>(outputDir));
+
+        <span class="comment">// 1. Load data</span>
+        <span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"Loading Fashion MNIST..."</span>);
+        <span class="type">FashionMNIST</span> dataset = <span class="keyword">new</span> <span class="type">FashionMNIST</span>();
+        <span class="type">Tensor</span> xTrain = dataset.<span class="method">getXTrain</span>();
+        <span class="type">Tensor</span> yTrain = dataset.<span class="method">getYTrain</span>();
+        <span class="type">Tensor</span> xTest = dataset.<span class="method">getXTest</span>();
+        <span class="type">Tensor</span> yTest = dataset.<span class="method">getYTest</span>();
+
+        <span class="comment">// 2. Build model</span>
+        <span class="type">Sequential</span> model = <span class="keyword">new</span> <span class="type">Sequential</span>();
+        model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">256</span>, <span class="string">"relu"</span>));
+        model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dropout</span>(<span class="number">0.3</span>));
+        model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">128</span>, <span class="string">"relu"</span>));
+        model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dropout</span>(<span class="number">0.2</span>));
+        model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">10</span>, <span class="string">"softmax"</span>));
+
+        model.<span class="method">compile</span>(
+            <span class="keyword">new</span> <span class="type">SparseCategoricalCrossentropy</span>(),
+            <span class="keyword">new</span> <span class="type">Adam</span>(<span class="number">0.001</span>)
+        );
+
+        <span class="comment">// 3. Set up callbacks</span>
+        <span class="type">EarlyStopping</span> earlyStop = <span class="keyword">new</span> <span class="type">EarlyStopping</span>(<span class="string">"val_loss"</span>, <span class="number">10</span>, <span class="keyword">true</span>);
+        <span class="type">ReduceLROnPlateau</span> reduceLr = <span class="keyword">new</span> <span class="type">ReduceLROnPlateau</span>(<span class="string">"val_loss"</span>, <span class="number">0.5</span>, <span class="number">5</span>, <span class="number">1e-7</span>);
+
+        <span class="comment">// 4. Train - returns ExecutionMatrix</span>
+        <span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"\nTraining model..."</span>);
+        <span class="type">ExecutionMatrix</span> execMatrix = model.<span class="method">fit</span>(
+            xTrain, yTrain,     <span class="comment">// data</span>
+            <span class="number">50</span>,                 <span class="comment">// epochs</span>
+            <span class="number">64</span>,                 <span class="comment">// batch size</span>
+            <span class="number">0.001</span>,              <span class="comment">// learning rate</span>
+            <span class="number">0.15</span>,               <span class="comment">// validation split</span>
+            earlyStop, reduceLr  <span class="comment">// callbacks</span>
+        );
+
+        <span class="comment">// 5. Print training summary</span>
+        <span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"\nTraining Summary:"</span>);
+        execMatrix.<span class="method">printSummary</span>();
+
+        <span class="comment">// 6. Export training data</span>
+        execMatrix.<span class="method">exportToCSV</span>(outputDir + <span class="string">"/training_log.csv"</span>);
+
+        <span class="comment">// 7. Generate charts</span>
+        <span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"\nGenerating charts..."</span>);
+
+        <span class="comment">// Training history</span>
+        <span class="type">ChartUtils</span>.<span class="method">plotTrainingHistory</span>(
+            execMatrix.<span class="method">toHistoryMap</span>(),
+            <span class="string">"Fashion MNIST Training"</span>,
+            outputDir + <span class="string">"/training_history.png"</span>,
+            <span class="number">1000</span>, <span class="number">600</span>
+        );
+
+        <span class="comment">// 8. Evaluate and visualize predictions</span>
+        <span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"\nEvaluating on test set..."</span>);
+        model.<span class="method">printEvaluation</span>(xTest, yTest);
+
+        <span class="type">Tensor</span> predictions = model.<span class="method">predict</span>(xTest);
+        <span class="type">double</span>[] actual = yTest.<span class="method">getData</span>();
+        <span class="type">double</span>[] predProbs = predictions.<span class="method">getData</span>();
+
+        <span class="comment">// Convert probabilities to class predictions</span>
+        <span class="type">int</span>[] predLabels = argmaxPerRow(predProbs, <span class="number">10</span>);
+        <span class="type">double</span>[] predDoubles = <span class="keyword">new</span> <span class="type">double</span>[predLabels.length];
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i < predLabels.length; i++) {
+            predDoubles[i] = predLabels[i];
+        }
+
+        <span class="comment">// Plot sample of predictions</span>
+        <span class="type">int</span> sampleSize = <span class="type">Math</span>.<span class="method">min</span>(<span class="number">200</span>, actual.length);
+        <span class="type">double</span>[] actualSample = <span class="keyword">new</span> <span class="type">double</span>[sampleSize];
+        <span class="type">double</span>[] predSample = <span class="keyword">new</span> <span class="type">double</span>[sampleSize];
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i < sampleSize; i++) {
+            actualSample[i] = actual[i];
+            predSample[i] = predDoubles[i];
+        }
+
+        <span class="type">ChartUtils</span>.<span class="method">plotPredictions</span>(
+            actualSample,
+            predSample,
+            <span class="string">"Classification Results (First 200 samples)"</span>,
+            outputDir + <span class="string">"/predictions.png"</span>
+        );
+
+        <span class="comment">// Calculate and plot errors</span>
+        <span class="type">double</span>[] errors = <span class="keyword">new</span> <span class="type">double</span>[actual.length];
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i < actual.length; i++) {
+            errors[i] = (actual[i] == predDoubles[i]) ? <span class="number">0.0</span> : <span class="number">1.0</span>;
+        }
+
+        <span class="type">ChartUtils</span>.<span class="method">plotHistogram</span>(
+            errors,
+            <span class="string">"Error Distribution"</span>,
+            <span class="string">"Error (0=correct, 1=incorrect)"</span>,
+            outputDir + <span class="string">"/error_histogram.png"</span>,
+            <span class="number">2</span>
+        );
+
+        <span class="type">System</span>.out.<span class="method">println</span>(<span class="string">"\nDone! Results saved to: "</span> + outputDir);
+    }
+
+    <span class="keyword">private static</span> <span class="type">int</span>[] <span class="method">argmaxPerRow</span>(<span class="type">double</span>[] probs, <span class="type">int</span> numClasses) {
+        <span class="type">int</span>[] result = <span class="keyword">new</span> <span class="type">int</span>[probs.length / numClasses];
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i < result.length; i++) {
+            <span class="type">int</span> maxIdx = <span class="number">0</span>;
+            <span class="type">double</span> maxVal = probs[i * numClasses];
+            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j < numClasses; j++) {
+                <span class="keyword">if</span> (probs[i * numClasses + j] > maxVal) {
+                    maxVal = probs[i * numClasses + j];
+                    maxIdx = j;
+                }
+            }
+            result[i] = maxIdx;
+        }
+        <span class="keyword">return</span> result;
+    }
+}</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>5. Output File Structure</h2>
+
+                <p>When you run the visualization example, you'll get:</p>
+
+                <div class="concept-box">
+                    <h4>Generated Files</h4>
+                    <pre><code>output/fashion_mnist_visual/
+├── training_history.png      # Loss/accuracy curves
+├── predictions.png           # Predictions vs actual (scatter)
+├── error_histogram.png       # Error distribution
+├── training_log.csv          # Full training log for analysis
+└── best_model.json           # Best model (from EarlyStopping)</code></pre>
+                </div>
+
+                <div class="info">
+                    <div class="info-title">Using CSV in Excel/Python</div>
+                    <p>
+                        The CSV file can be opened in Excel or analyzed with Python's pandas:
+                    </p>
+                    <pre style="margin-top: 10px;"><code><span class="comment"># Python example</span>
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+df = pd.read_csv(<span class="string">'training_log.csv'</span>)
+print(df.head())</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>6. ChartUtils Reference</h2>
+
+                <table>
+                    <thead>
+                        <tr><th>Method</th><th>Chart Type</th><th>Use Case</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>plotTrainingHistory()</code></td><td>Line chart</td><td>Loss/accuracy over epochs</td></tr>
+                        <tr><td><code>plotPredictions()</code></td><td>Line chart</td><td>Predicted vs actual values</td></tr>
+                        <tr><td><code>plotTimeSeries()</code></td><td>Line chart</td><td>Time series data</td></tr>
+                        <tr><td><code>plotBarChart()</code></td><td>Bar chart</td><td>Model comparison</td></tr>
+                        <tr><td><code>plotScatter()</code></td><td>Scatter plot</td><td>PCA, correlations</td></tr>
+                        <tr><td><code>plotResiduals()</code></td><td>Scatter plot</td><td>Regression analysis</td></tr>
+                        <tr><td><code>plotHistogram()</code></td><td>Bar chart</td><td>Distribution analysis</td></tr>
+                        <tr><td><code>plotMultipleMetrics()</code></td><td>Line chart</td><td>Compare multiple series</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Next Steps</h2>
+                <p>
+                    Now you understand how to track and visualize training. Check out these tutorials:
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='fashion-mnist.html'">
+                        <h4>👕 Fashion MNIST Tutorial</h4>
+                        <p>Complete end-to-end example with visualization.</p>
+                    </div>
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='stock-prediction.html'">
+                        <h4>📈 Stock Prediction</h4>
+                        <p>Technical indicators, LSTM models, and trading backtest.</p>
+                    </div>
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='time-series.html'">
+                        <h4>⏱️ Time Series</h4>
+                        <p>Sequence generation and LSTM forecasting.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Tenzor</strong> - Java Machine Learning Library</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TensorFlow-like API - Tenzor Tutorial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .breadcrumb { color: #fff; padding: 15px 0; font-size: 0.9em; }
+        .breadcrumb a { color: #fff; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+        header h1 { font-size: 2.5em; color: #667eea; margin-bottom: 10px; }
+        header h2 { font-size: 1.2em; color: #666; font-weight: 300; }
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+        nav ul li a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+        }
+        .section { margin-bottom: 40px; }
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e83e8c;
+        }
+        pre code { background: none; padding: 0; color: #abb2bf; }
+        .keyword { color: #c678dd; }
+        .type { color: #61afef; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+        .number { color: #d19a66; }
+        .method { color: #61afef; }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-title { font-weight: bold; color: #0c5460; margin-bottom: 5px; }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning-title { font-weight: bold; color: #856404; margin-bottom: 5px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        table tr:hover { background: #f5f5f5; }
+        .concept-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .concept-box h4 { color: #667eea; margin-bottom: 10px; }
+        footer { text-align: center; padding: 30px; color: white; }
+        .flow-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .flow-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .flow-arrow { color: #764ba2; font-size: 1.5em; font-weight: bold; }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .toc h4 { color: #667eea; margin-bottom: 15px; }
+        .toc ul { list-style: none; margin: 0; padding: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #667eea; text-decoration: none; }
+        .toc a:hover { color: #764ba2; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &raquo; TensorFlow-like API
+        </div>
+
+        <header>
+            <h1>TensorFlow-like API Guide</h1>
+            <h2>Building Neural Networks in Java with Keras-style syntax</h2>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="sklearn-api.html">scikit-learn API</a></li>
+                <li><a href="fashion-mnist.html">Fashion MNIST</a></li>
+                <li><a href="visualization.html">Visualization</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <div class="toc">
+                <h4>Table of Contents</h4>
+                <ul>
+                    <li><a href="#workflow">1. Typical Workflow</a></li>
+                    <li><a href="#sequential">2. Sequential Model</a></li>
+                    <li><a href="#layers">3. Layers</a></li>
+                    <li><a href="#activations">4. Activation Functions</a></li>
+                    <li><a href="#losses">5. Loss Functions</a></li>
+                    <li><a href="#optimizers">6. Optimizers</a></li>
+                    <li><a href="#callbacks">7. Callbacks</a></li>
+                    <li><a href="#compile-fit">8. Compile & Fit</a></li>
+                    <li><a href="#predict-evaluate">9. Predict & Evaluate</a></li>
+                    <li><a href="#saving-loading">10. Saving & Loading Models</a></li>
+                </ul>
+            </div>
+
+            <div class="section" id="workflow">
+                <h2>1. Typical Workflow</h2>
+
+                <div class="flow-box">
+                    <div class="flow-item">Load Data</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Build Model</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Compile</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Train</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Evaluate</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Predict</div>
+                </div>
+
+                <pre><code><span class="comment">// 1. Load and preprocess data</span>
+<span class="type">FashionMNIST</span> dataset = <span class="keyword">new</span> <span class="type">FashionMNIST</span>();
+<span class="type">Tensor</span> xTrain = dataset.<span class="method">getXTrain</span>();
+<span class="type">Tensor</span> yTrain = dataset.<span class="method">getYTrain</span>();
+
+<span class="comment">// 2. Build model</span>
+<span class="type">Sequential</span> model = <span class="keyword">new</span> <span class="type">Sequential</span>();
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">128</span>, <span class="string">"relu"</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">10</span>, <span class="string">"softmax"</span>));
+
+<span class="comment">// 3. Compile</span>
+model.<span class="method">compile</span>(
+    <span class="keyword">new</span> <span class="type">SparseCategoricalCrossentropy</span>(),
+    <span class="keyword">new</span> <span class="type">Adam</span>(<span class="number">0.001</span>)
+);
+
+<span class="comment">// 4. Train</span>
+<span class="type">ExecutionMatrix</span> exec = model.<span class="method">fit</span>(
+    xTrain, yTrain,     <span class="comment">// data</span>
+    <span class="number">50</span>,                 <span class="comment">// epochs</span>
+    <span class="number">32</span>,                 <span class="comment">// batch size</span>
+    <span class="number">0.001</span>,              <span class="comment">// learning rate</span>
+    <span class="number">0.1</span>                 <span class="comment">// validation split</span>
+);
+
+<span class="comment">// 5. Evaluate</span>
+model.<span class="method">printEvaluation</span>(xTest, yTest);
+
+<span class="comment">// 6. Predict</span>
+<span class="type">Tensor</span> predictions = model.<span class="method">predict</span>(xTest);</code></pre>
+            </div>
+
+            <div class="section" id="sequential">
+                <h2>2. Sequential Model</h2>
+
+                <div class="info">
+                    <div class="info-title">What is the Sequential model?</div>
+                    <p>
+                        The <code>Sequential</code> class is a linear stack of layers.
+                        It's the simplest way to build a neural network - you just add layers one after another.
+                    </p>
+                </div>
+
+                <h3>2.1: Creating a Sequential Model</h3>
+                <pre><code><span class="comment">// Create empty model</span>
+<span class="type">Sequential</span> model = <span class="keyword">new</span> <span class="type">Sequential</span>();
+
+<span class="comment">// Add layers</span>
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">256</span>, <span class="string">"relu"</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dropout</span>(<span class="number">0.3</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">10</span>, <span class="string">"softmax"</span>));</code></pre>
+            </div>
+
+            <div class="section" id="layers">
+                <h2>3. Layers</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Layer</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Dense</strong></td>
+                            <td>Fully connected layer - every input connected to every output</td>
+                            <td><code>new Dense(64, "relu")</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dropout</strong></td>
+                            <td>Regularization - randomly sets inputs to 0 during training</td>
+                            <td><code>new Dropout(0.2)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flatten</strong></td>
+                            <td>Flattens multi-dimensional input to 1D</td>
+                            <td><code>new Flatten()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BatchNormalization</strong></td>
+                            <td>Normalizes layer inputs, stabilizes training</td>
+                            <td><code>new BatchNormalization()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>LSTM</strong></td>
+                            <td>Long Short-Term Memory - for sequence data</td>
+                            <td><code>new LSTM(50, true)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>GRU</strong></td>
+                            <td>Gated Recurrent Unit - simpler LSTM alternative</td>
+                            <td><code>new GRU(32, false)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conv2D</strong></td>
+                            <td>2D Convolution - for images</td>
+                            <td><code>new Conv2D(32, 3, "relu")</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>MaxPooling2D</strong></td>
+                            <td>Max pooling - reduces spatial dimensions</td>
+                            <td><code>new MaxPooling2D(2)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Embedding</strong></td>
+                            <td>Turns integers into dense vectors - for text</td>
+                            <td><code>new Embedding(1000, 64)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3.1: Dense Layer Deep Dive</h3>
+
+                <div class="concept-box">
+                    <h4>Dense Layer Parameters</h4>
+                    <pre><code><span class="type">Dense</span>(<span class="type">int</span> units, <span class="type">String</span> activation)
+
+<span class="comment">// units:       Number of neurons/output units</span>
+<span class="comment">// activation:  Activation function ("relu", "sigmoid", "tanh", "softmax", "linear")</span>
+
+<span class="comment">// Examples:</span>
+<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">128</span>, <span class="string">"relu"</span>);      <span class="comment">// Hidden layer with ReLU</span>
+<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">1</span>, <span class="string">"sigmoid"</span>);      <span class="comment">// Binary classification output</span>
+<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">10</span>, <span class="string">"softmax"</span>);     <span class="comment">// Multi-class classification (10 classes)</span>
+<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">1</span>, <span class="string">"linear"</span>);       <span class="comment">// Regression output</span></code></pre>
+                </div>
+
+                <h3>3.2: Recurrent Layers (LSTM, GRU)</h3>
+
+                <div class="info">
+                    <div class="info-title">When to use LSTMs</div>
+                    <p>
+                        Use LSTMs and GRUs for <strong>sequential data</strong>:
+                        time series, text, speech, or any data where order matters.
+                    </p>
+                </div>
+
+                <pre><code><span class="comment">// LSTM for time series</span>
+<span class="type">Sequential</span> model = <span class="keyword">new</span> <span class="type">Sequential</span>();
+
+<span class="comment">// LSTM(units, return_sequences)</span>
+<span class="comment">// return_sequences=true: pass full sequence to next recurrent layer</span>
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">LSTM</span>(<span class="number">64</span>, <span class="keyword">true</span>));   <span class="comment">// First LSTM returns sequences</span>
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dropout</span>(<span class="number">0.2</span>));
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">LSTM</span>(<span class="number">32</span>, <span class="keyword">false</span>));  <span class="comment">// Final LSTM returns only last output</span>
+model.<span class="method">add</span>(<span class="keyword">new</span> <span class="type">Dense</span>(<span class="number">1</span>));            <span class="comment">// Predict single value</span>
+
+<span class="comment">// Input shape expected: (samples, time_steps, features)</span>
+<span class="comment">// Example: 100 samples, 30 time steps, 5 features</span>
+<span class="type">Tensor</span> input = xTrain.<span class="method">reshape</span>(<span class="number">100</span>, <span class="number">30</span>, <span class="number">5</span>);</code></pre>
+            </div>
+
+            <div class="section" id="activations">
+                <h2>4. Activation Functions</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Formula</th>
+                            <th>Use Case</th>
+                            <th>Output Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ReLU</strong></td>
+                            <td><code>max(0, x)</code></td>
+                            <td>Hidden layers (most common)</td>
+                            <td>[0, ∞)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sigmoid</strong></td>
+                            <td><code>1 / (1 + e^(-x))</code></td>
+                            <td>Binary classification</td>
+                            <td>[0, 1]</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tanh</strong></td>
+                            <td><code>tanh(x)</code></td>
+                            <td>RNNs, normalized inputs</td>
+                            <td>[-1, 1]</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Softmax</strong></td>
+                            <td><code>e^xi / Σ(e^xj)</code></td>
+                            <td>Multi-class classification</td>
+                            <td>[0, 1] (sums to 1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Linear</strong></td>
+                            <td><code>x</code></td>
+                            <td>Regression output</td>
+                            <td>(-∞, ∞)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <div class="warning-title">Choosing the Right Activation</div>
+                    <ul>
+                        <li><strong>Hidden layers</strong>: Use ReLU - it helps with vanishing gradients</li>
+                        <li><strong>Binary classification output</strong>: Use sigmoid</li>
+                        <li><strong>Multi-class classification</strong>: Use softmax</li>
+                        <li><strong>Regression</strong>: Use linear (no activation)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="losses">
+                <h2>5. Loss Functions</h2>
+
+                <p>
+                    The <strong>loss function</strong> measures how far the model's predictions are from the actual values.
+                    The optimizer uses this loss to update the model's weights.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Loss Function</th>
+                            <th>Problem Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>MeanSquaredError (MSE)</strong></td>
+                            <td>Regression</td>
+                            <td>Average of squared differences</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MeanAbsoluteError (MAE)</strong></td>
+                            <td>Regression</td>
+                            <td>Average of absolute differences</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Huber</strong></td>
+                            <td>Regression</td>
+                            <td>Less sensitive to outliers than MSE</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BinaryCrossentropy</strong></td>
+                            <td>Binary Classification</td>
+                            <td>For 2 classes (0/1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CategoricalCrossentropy</strong></td>
+                            <td>Multi-class Classification</td>
+                            <td>For one-hot encoded labels</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SparseCategoricalCrossentropy</strong></td>
+                            <td>Multi-class Classification</td>
+                            <td>For integer labels (0, 1, 2...)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hinge</strong></td>
+                            <td>Classification</td>
+                            <td>For SVM-like margins</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <pre><code><span class="comment">// Regression</span>
+model.<span class="method">compile</span>(<span class="keyword">new</span> <span class="type">MeanSquaredError</span>(), <span class="keyword">new</span> <span class="type">Adam</span>());
+
+<span class="comment">// Binary classification (labels: 0 or 1)</span>
+model.<span class="method">compile</span>(<span class="keyword">new</span> <span class="type">BinaryCrossentropy</span>(), <span class="keyword">new</span> <span class="type">Adam</span>());
+
+<span class="comment">// Multi-class classification with integer labels</span>
+<span class="comment">// Example: Fashion MNIST labels: 0, 1, 2, ..., 9</span>
+model.<span class="method">compile</span>(<span class="keyword">new</span> <span class="type">SparseCategoricalCrossentropy</span>(), <span class="keyword">new</span> <span class="type">Adam</span>());
+
+<span class="comment">// Multi-class with one-hot encoded labels</span>
+<span class="comment">// Example: labels = [[1,0,0], [0,1,0], ...]</span>
+model.<span class="method">compile</span>(<span class="keyword">new</span> <span class="type">CategoricalCrossentropy</span>(), <span class="keyword">new</span> <span class="type">Adam</span>());</code></pre>
+            </div>
+
+            <div class="section" id="optimizers">
+                <h2>6. Optimizers</h2>
+
+                <p>
+                    <strong>Optimizers</strong> update the model's weights to minimize the loss.
+                    Different optimizers use different strategies for this.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Optimizer</th>
+                            <th>Description</th>
+                            <th>When to Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SGD</strong></td>
+                            <td>Stochastic Gradient Descent</td>
+                            <td>Simple, good for large datasets</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adam</strong></td>
+                            <td>Adaptive Moment Estimation</td>
+                            <td><strong>Default choice</strong> - works well for most problems</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RMSprop</strong></td>
+                            <td>Root Mean Square Propagation</td>
+                            <td>Good for RNNs, online learning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adagrad</strong></td>
+                            <td>Adaptive Gradient</td>
+                            <td>Sparse data, large feature spaces</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adadelta</strong></td>
+                            <td>Adadelta</td>
+                            <td>Continues learning over time</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <pre><code><span class="comment">// Adam is usually the best default</span>
+model.<span class="method">compile</span>(loss, <span class="keyword">new</span> <span class="type">Adam</span>(<span class="number">0.001</span>));
+
+<span class="comment">// SGD with momentum</span>
+model.<span class="method">compile</span>(loss, <span class="keyword">new</span> <span class="type">SGD</span>(<span class="number">0.01</span>, <span class="number">0.9</span>));  <span class="comment">// lr=0.01, momentum=0.9</span>
+
+<span class="comment">// RMSprop</span>
+model.<span class="method">compile</span>(loss, <span class="keyword">new</span> <span class="type">RMSprop</span>(<span class="number">0.001</span>));</code></pre>
+
+                <div class="info">
+                    <div class="info-title">Learning Rate Guidelines</div>
+                    <ul>
+                        <li><strong>0.001</strong> - Good default for Adam</li>
+                        <li><strong>0.01</strong> - Good default for SGD</li>
+                        <li><strong>Too high</strong> → Model doesn't converge, loss oscillates</li>
+                        <li><strong>Too low</strong> → Training is slow, may get stuck in local minimum</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="callbacks">
+                <h2>7. Callbacks</h2>
+
+                <p>
+                    <strong>Callbacks</strong> are objects that perform actions at different stages of training.
+                    They can monitor metrics, save models, stop training early, and more.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Callback</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>EarlyStopping</strong></td>
+                            <td>Stop training when validation loss stops improving</td>
+                            <td><code>new EarlyStopping("val_loss", 10, true)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ModelCheckpoint</strong></td>
+                            <td>Save model at certain intervals</td>
+                            <td><code>new ModelCheckpoint("best.json", "val_loss", true)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ReduceLROnPlateau</strong></td>
+                            <td>Reduce learning rate when metric plateaus</td>
+                            <td><code>new ReduceLROnPlateau("val_loss", 0.5, 5, 1e-7)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <pre><code><span class="comment">// Create callbacks</span>
+<span class="type">EarlyStopping</span> earlyStop = <span class="keyword">new</span> <span class="type">EarlyStopping</span>(
+    <span class="string">"val_loss"</span>,      <span class="comment">// Monitor validation loss</span>
+    <span class="number">10</span>,                 <span class="comment">// Wait 10 epochs before stopping</span>
+    <span class="keyword">true</span>                <span class="comment">// Restore weights from best epoch</span>
+);
+
+<span class="type">ModelCheckpoint</span> checkpoint = <span class="keyword">new</span> <span class="type">ModelCheckpoint</span>(
+    <span class="string">"models/best_model.json"</span>,  <span class="comment">// Save path</span>
+    <span class="string">"val_loss"</span>,              <span class="comment">// Monitor this metric</span>
+    <span class="keyword">true</span>                        <span class="comment">// Save only when improvement</span>
+);
+
+<span class="type">ReduceLROnPlateau</span> reduceLr = <span class="keyword">new</span> <span class="type">ReduceLROnPlateau</span>(
+    <span class="string">"val_loss"</span>,      <span class="comment">// Monitor</span>
+    <span class="number">0.5</span>,                <span class="comment">// Multiply lr by 0.5</span>
+    <span class="number">5</span>,                  <span class="comment">// Wait 5 epochs</span>
+    <span class="number">1e-8</span>                 <span class="comment">// Minimum learning rate</span>
+);
+
+<span class="comment">// Use callbacks in fit()</span>
+model.<span class="method">fit</span>(xTrain, yTrain, <span class="number">100</span>, <span class="number">32</span>, <span class="number">0.001</span>, <span class="number">0.1</span>,
+    earlyStop, checkpoint, reduceLr
+);</code></pre>
+            </div>
+
+            <div class="section" id="compile-fit">
+                <h2>8. Compile & Fit</h2>
+
+                <h3>8.1: compile()</h3>
+                <pre><code>model.<span class="method">compile</span>(
+    <span class="comment">// Required: Loss function</span>
+    <span class="keyword">new</span> <span class="type">SparseCategoricalCrossentropy</span>(),
+    
+    <span class="comment">// Required: Optimizer</span>
+    <span class="keyword">new</span> <span class="type">Adam</span>(<span class="number">0.001</span>)
+);</code></pre>
+
+                <h3>8.2: fit()</h3>
+
+                <div class="concept-box">
+                    <h4>fit() Parameters</h4>
+                    <pre><code><span class="type">ExecutionMatrix</span> exec = model.<span class="method">fit</span>(
+    xTrain,                 <span class="comment">// Training features</span>
+    yTrain,                 <span class="comment">// Training labels</span>
+    epochs,                 <span class="comment">// Number of epochs</span>
+    batchSize,              <span class="comment">// Batch size</span>
+    learningRate,           <span class="comment">// Learning rate</span>
+    validationSplit,        <span class="comment">// Fraction for validation (0.1 = 10%)</span>
+    callbacks...            <span class="comment">// Optional: varargs of callbacks</span>
+);</code></pre>
+                </div>
+
+                <h3>8.3: Understanding the Training Output</h3>
+
+                <pre><code>Epoch  | Train Loss   | Val Loss     | Train Acc    | Val Acc      | Duration  
+----------------------------------------------------------------------------------------------------
+1/50   | 0.824074     | 0.543210     | 0.7123       | 0.8234       | 0.45s     
+2/50   | 0.432109     | 0.321098     | 0.8456       | 0.8876       | 0.42s     
+3/50   | 0.321098     | 0.287654     | 0.8876       | 0.9012       | 0.41s     </code></pre>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Column</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Epoch</strong></td>
+                            <td>Current epoch / Total epochs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Train Loss</strong></td>
+                            <td>Loss on training data (should decrease)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Val Loss</strong></td>
+                            <td>Loss on validation data (watch for increase = overfitting)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Train Acc</strong></td>
+                            <td>Accuracy on training data</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Val Acc</strong></td>
+                            <td>Accuracy on validation data</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duration</strong></td>
+                            <td>Time taken for this epoch</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <div class="warning-title">Overfitting Warning Signs</div>
+                    <ul>
+                        <li>Train loss continues to decrease but validation loss increases</li>
+                        <li>Train accuracy is much higher than validation accuracy</li>
+                        <li><strong>Solution</strong>: Add Dropout layers, reduce model size, use EarlyStopping</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="predict-evaluate">
+                <h2>9. Predict & Evaluate</h2>
+
+                <h3>9.1: predict()</h3>
+                <pre><code><span class="comment">// Get raw predictions</span>
+<span class="type">Tensor</span> predictions = model.<span class="method">predict</span>(xTest);
+
+<span class="comment">// For classification, predictions are probabilities</span>
+<span class="comment">// Example: Fashion MNIST - 10 classes</span>
+<span class="type">double</span>[] pred = predictions.<span class="method">getData</span>();
+<span class="comment">// pred = [0.1, 0.01, 0.02, 0.05, 0.03, 0.6, 0.02, 0.1, 0.05, 0.02]</span>
+<span class="comment">// Class 5 has highest probability (0.6)</span>
+
+<span class="comment">// Convert probabilities to class labels</span>
+<span class="type">int</span> predictedClass = argmax(pred);</code></pre>
+
+                <h3>9.2: evaluate()</h3>
+                <pre><code><span class="comment">// Get evaluation metrics as a Map</span>
+<span class="type">Map</span><<span class="type">String</span>, <span class="type">Double</span>> metrics = model.<span class="method">evaluate</span>(xTest, yTest);
+
+<span class="comment">// Classification returns:</span>
+<span class="comment">// - loss</span>
+<span class="comment">// - accuracy</span>
+<span class="comment">// - precision</span>
+<span class="comment">// - recall</span>
+<span class="comment">// - f1</span>
+
+<span class="comment">// Regression returns:</span>
+<span class="comment">// - loss</span>
+<span class="comment">// - mse</span>
+<span class="comment">// - mae</span></code></pre>
+
+                <h3>9.3: printEvaluation()</h3>
+                <pre><code><span class="comment">// Print formatted evaluation</span>
+model.<span class="method">printEvaluation</span>(xTest, yTest);</code></pre>
+
+                <p>Output:</p>
+                <pre><code>==================================================
+EVALUATION RESULTS
+==================================================
+loss        : 0.345678
+accuracy    : 0.8923 (89.23%)
+precision   : 0.8876 (88.76%)
+recall      : 0.8912 (89.12%)
+f1          : 0.8894 (88.94%)
+==================================================</code></pre>
+            </div>
+
+            <div class="section" id="saving-loading">
+                <h2>10. Saving & Loading Models</h2>
+
+                <h3>10.1: Save Model</h3>
+                <pre><code><span class="keyword">import</span> com.tenzor.io.ModelSaver;
+
+<span class="comment">// Save to JSON</span>
+<span class="type">ModelSaver</span>.<span class="method">save</span>(model, <span class="string">"models/my_model.json"</span>);</code></pre>
+
+                <h3>10.2: Load Model</h3>
+                <pre><code><span class="keyword">import</span> com.tenzor.io.ModelLoader;
+
+<span class="comment">// Load from JSON</span>
+<span class="type">Sequential</span> loadedModel = <span class="type">ModelLoader</span>.<span class="method">load</span>(<span class="string">"models/my_model.json"</span>);
+
+<span class="comment">// Use the loaded model</span>
+<span class="type">Tensor</span> predictions = loadedModel.<span class="method">predict</span>(xTest);</code></pre>
+
+                <h3>10.3: ExecutionMatrix Saving</h3>
+                <pre><code><span class="type">ExecutionMatrix</span> execMatrix = model.<span class="method">fit</span>(...);
+
+<span class="comment">// Export to CSV for analysis in Excel/Python</span>
+execMatrix.<span class="method">exportToCSV</span>(<span class="string">"training/training_log.csv"</span>);
+
+<span class="comment">// Save and load binary format</span>
+execMatrix.<span class="method">save</span>(<span class="string">"training/exec_matrix.bin"</span>);
+<span class="type">ExecutionMatrix</span> loaded = <span class="type">ExecutionMatrix</span>.<span class="method">load</span>(<span class="string">"training/exec_matrix.bin"</span>);</code></pre>
+
+                <h3>10.4: ExecutionMatrix Methods</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>printSummary()</code></td>
+                            <td>Print summary of best metrics and total time</td>
+                        </tr>
+                        <tr>
+                            <td><code>printEpochTable()</code></td>
+                            <td>Print table of all epochs</td>
+                        </tr>
+                        <tr>
+                            <td><code>getBestTrainLoss()</code></td>
+                            <td>Best training loss achieved</td>
+                        </tr>
+                        <tr>
+                            <td><code>getBestValidationLoss()</code></td>
+                            <td>Best validation loss achieved</td>
+                        </tr>
+                        <tr>
+                            <td><code>getEpochWithBestValLoss()</code></td>
+                            <td>Epoch number with best validation</td>
+                        </tr>
+                        <tr>
+                            <td><code>getTotalTrainingTimeMs()</code></td>
+                            <td>Total training duration in milliseconds</td>
+                        </tr>
+                        <tr>
+                            <td><code>toHistoryMap()</code></td>
+                            <td>Convert to format for ChartUtils</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Next Steps</h2>
+                <p>
+                    Now you understand the TensorFlow-like API. Check out these tutorials:
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='fashion-mnist.html'">
+                        <h4>👕 Fashion MNIST Tutorial</h4>
+                        <p>Complete end-to-end example: loading data, building model, training, and visualization.</p>
+                    </div>
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='visualization.html'">
+                        <h4>📊 Visualization Guide</h4>
+                        <p>Learn how to generate training charts, predictions plots, and more.</p>
+                    </div>
+                    <div class="concept-box" style="cursor: pointer;" onclick="window.location='time-series.html'">
+                        <h4>📈 Time Series</h4>
+                        <p>Learn how to use LSTMs for time series forecasting.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Tenzor</strong> - Java Machine Learning Library</p>
+        </footer>
+    </div>
+</body>
+</html>

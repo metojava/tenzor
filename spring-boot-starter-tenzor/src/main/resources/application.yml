@@ -1,0 +1,21 @@
+tenzor:
+  model:
+    save-path: models/
+  training:
+    epochs: 100
+    batch-size: 32
+    learning-rate: 0.001
+    validation-split: 0.15
+    early-stopping: true
+    early-stopping-patience: 10
+    checkpointing: true
+    checkpoint-path: checkpoints/
+  visualization:
+    enabled: true
+    output-path: charts/
+    chart-width: 1000
+    chart-height: 600
+
+spring:
+  application:
+    name: tenzor-demo
